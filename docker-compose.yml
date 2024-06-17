@@ -53,7 +53,7 @@ services:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
       test:
-        ["CMD", "pg_isready", "-U", "postgres", "-d", "midshiftDB"]
+        ["CMD", "pg_isready", "-U", "root", "-d", "shadow_hunters"]
       interval: 5s
       timeout: 10s
       retries: 5
