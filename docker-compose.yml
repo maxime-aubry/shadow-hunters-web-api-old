@@ -25,6 +25,7 @@ services:
     volumes:
       - .:/usr/src/app # any change to base folder should be reflected
       - /usr/src/app/node_modules
+    command: bun --bun start:dev auth # overrides CMD from dockerfile
 
   shadow-hunters-web-api:
     build:
@@ -40,6 +41,7 @@ services:
     volumes:
       - .:/usr/src/app # any change to base folder should be reflected
       - /usr/src/app/node_modules
+    command: bun --bun start:dev shadow-hunters-web-api # overrides CMD from dockerfile
 
   postgres:
     image: postgres
