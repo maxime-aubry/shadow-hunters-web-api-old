@@ -1,22 +1,22 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/shadow-hunters-web-api/src",
+  "sourceRoot": "apps/api/src",
   "compilerOptions": {
     "deleteOutDir": true,
     "webpack": true,
-    "tsConfigPath": "apps/shadow-hunters-web-api/tsconfig.app.json"
+    "tsConfigPath": "apps/api/tsconfig.app.json"
   },
   "monorepo": true,
-  "root": "apps/shadow-hunters-web-api",
+  "root": "apps/api",
   "projects": {
-    "shadow-hunters-web-api": {
+    "api": {
       "type": "application",
-      "root": "apps/shadow-hunters-web-api",
+      "root": "apps/api",
       "entryFile": "main",
-      "sourceRoot": "apps/shadow-hunters-web-api/src",
+      "sourceRoot": "apps/api/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/shadow-hunters-web-api/tsconfig.app.json"
+        "tsConfigPath": "apps/api/tsconfig.app.json"
       }
     },
     "auth": {

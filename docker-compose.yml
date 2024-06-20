@@ -1,9 +1,7 @@
-version: '3'
-
 services:
   rabbitmq:
-    image: rabbitmq:3-management
     container_name: rabbitmq
+    image: rabbitmq:3-management
     hostname: rabbitmq
     volumes:
       - /var/lib/rabbitmq
@@ -14,6 +12,7 @@ services:
       - .env
 
   auth:
+    container_name: auth
     build:
       context: ./
       dockerfile: ./apps/auth/Dockerfile
@@ -21,16 +20,17 @@ services:
       - .env
     depends_on:
       - rabbitmq
-      - postgres
+      - db
     volumes:
       - .:/usr/src/app # any change to base folder should be reflected
       - /usr/src/app/node_modules
     command: bun --bun start:dev auth # overrides CMD from dockerfile
 
-  shadow-hunters-web-api:
+  api:
+    container_name: api
     build:
       context: ./
-      dockerfile: ./apps/shadow-hunters-web-api/Dockerfile
+      dockerfile: ./apps/api/Dockerfile
     ports:
       - 4000:5000
     env_file:
@@ -41,18 +41,16 @@ services:
     volumes:
       - .:/usr/src/app # any change to base folder should be reflected
       - /usr/src/app/node_modules
-    command: bun --bun start:dev shadow-hunters-web-api # overrides CMD from dockerfile
+    command: bun --bun start:dev api # overrides CMD from dockerfile
 
-  postgres:
+  db:
+    container_name: database
     image: postgres
     restart: always
     env_file:
       - .env
     ports:
-      - 5436:5432
-    volumes:
-      #- ./db/data:/var/lib/postgresql/data
-      - pgdata:/var/lib/postgresql/data
+      - 5432:5432
     healthcheck:
       test:
         ["CMD", "pg_isready", "-U", "root", "-d", "shadow_hunters"]
@@ -60,10 +58,10 @@ services:
       timeout: 10s
       retries: 5
 
-  postgres_admin:
+  pgadmin:
+    container_name: pgadmin4_container
     image: dpage/pgadmin4
-    depends_on:
-      - postgres
+    restart: always
     env_file:
       - .env
     ports:
