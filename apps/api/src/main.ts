@@ -6,7 +6,10 @@ import { AppModule } from './app.module';
 async function bootstrap(): Promise<void> {
   const app: INestApplication<any> = await NestFactory.create(AppModule);
   configureSwagger(app);
-  await app.listen(5000);
+  await app.listen(5000, 'localhost', () => {
+    console.log('listen on 5000');
+    process.exit(0);
+  });
 }
 
 const configureSwagger = (app: INestApplication<any>): void => {

@@ -10,10 +10,12 @@ export class AuthService {
   ) {}
 
   async getUsers() {
+    console.log('auth::service::getUsers');
     return this.userRepository.find();
   }
 
   async postUser() {
+    console.log('auth::service::postUser');
     return this.userRepository.save({ name: 'Larry' });
   }
 }

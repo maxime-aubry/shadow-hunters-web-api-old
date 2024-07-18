@@ -11,6 +11,7 @@ export class AuthServiceProvider implements IProvider {
             provide: AuthServiceProvider.SERVICE_NAME,
             inject: [ConfigService],
             useFactory: (configService: ConfigService) => {
+                console.log('api::AuthServiceProvider');
                 const USER: string = configService.get('RABBITMQ_USER');
                 const PASSWORD: string = configService.get('RABBITMQ_PASS');
                 const HOST: string = configService.get('RABBITMQ_HOST');

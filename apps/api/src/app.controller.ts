@@ -8,6 +8,7 @@ export class AppController {
 
   @Get('auth')
   async getUsers() {
+    console.log('api::controller::getUsers');
     return this.authService.send(
       {
         cmd: 'get-users',
@@ -18,6 +19,7 @@ export class AppController {
 
   @Post('auth')
   async postUser() {
+    console.log('api::controller::postUser');
     return this.authService.send({
       cmd: 'post-user'
     },

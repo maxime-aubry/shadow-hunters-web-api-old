@@ -11,6 +11,7 @@ async function bootstrap() {
 }
 
 const configureRabbitMQ = (app: INestApplication<any>): void => {
+  console.log('auth::configureRabbitMQ');
   const configService: ConfigService<unknown, boolean> = app.get(ConfigService);
   const USER: string = configService.get('RABBITMQ_USER');
   const PASSWORD: string = configService.get('RABBITMQ_PASS');
