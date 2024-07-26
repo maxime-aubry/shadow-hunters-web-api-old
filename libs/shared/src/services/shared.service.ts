@@ -1,21 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { RmqContext, RmqOptions, Transport } from '@nestjs/microservices';
-import { SharedServiceInterface } from '../interfaces/shared.service.interface';
+import type { ConfigService } from '@nestjs/config';
+import { type RmqContext, type RmqOptions, Transport } from '@nestjs/microservices';
+import type { SharedServiceInterface } from './shared.service.interface';
 
 @Injectable()
 export class SharedService implements SharedServiceInterface {
-  constructor(private readonly configService: ConfigService) {}
+  private readonly configService: ConfigService;
 
-  getRmqOptions(queue: string): RmqOptions {
-    const USER = this.configService.get('RABBITMQ_USER');
-    const PASSWORD = this.configService.get('RABBITMQ_PASS');
-    const HOST = this.configService.get('RABBITMQ_HOST');
+  constructor(configService: ConfigService) {
+    this.configService = configService;
+  }
+
+  public getRmqOptions(queue: string): RmqOptions {
+    const user: string = this.configService.get('RABBITMQ_USER') as string;
+    const password: string = this.configService.get('RABBITMQ_PASS') as string;
+    const host: string = this.configService.get('RABBITMQ_HOST') as string;
 
     return {
       transport: Transport.RMQ,
       options: {
-        urls: [`amqp://${USER}:${PASSWORD}@${HOST}`],
+        urls: [`amqp://${user}:${password}@${host}`],
         noAck: false,
         queue,
         queueOptions: {
@@ -25,7 +29,7 @@ export class SharedService implements SharedServiceInterface {
     };
   }
 
-  acknowledgeMessage(context: RmqContext) {
+  public acknowledgeMessage(context: RmqContext): void {
     const channel = context.getChannelRef();
     const message = context.getMessage();
     channel.ack(message);

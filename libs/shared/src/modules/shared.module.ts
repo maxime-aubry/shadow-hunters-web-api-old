@@ -1,4 +1,4 @@
-import { DynamicModule, Module } from '@nestjs/common';
+import { type DynamicModule, Module, type Provider } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { SharedService } from '../services/shared.service';
@@ -15,18 +15,18 @@ import { SharedService } from '../services/shared.service';
 })
 export class SharedModule {
   static registerRmq(service: string, queue: string): DynamicModule {
-    const providers = [
+    const providers: Provider[] = [
       {
         provide: service,
         useFactory: (configService: ConfigService) => {
-          const USER = configService.get('RABBITMQ_USER');
-          const PASSWORD = configService.get('RABBITMQ_PASS');
-          const HOST = configService.get('RABBITMQ_HOST');
+          const user: string = configService.get('RABBITMQ_USER') as string;
+          const password: string = configService.get('RABBITMQ_PASS') as string;
+          const host: string = configService.get('RABBITMQ_HOST') as string;
 
           return ClientProxyFactory.create({
             transport: Transport.RMQ,
             options: {
-              urls: [`amqp://${USER}:${PASSWORD}@${HOST}`],
+              urls: [`amqp://${user}:${password}@${host}`],
               queue,
               queueOptions: {
                 durable: true, // queue survives broker restart
