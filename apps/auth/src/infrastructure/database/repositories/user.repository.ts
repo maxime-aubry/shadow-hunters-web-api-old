@@ -1,6 +1,6 @@
 import { DatabaseRepository } from '@app/shared';
 import { Injectable } from '@nestjs/common';
-import type { IUsersRepository } from 'apps/auth/src/domain/repositories/user.repository';
+import type { IUsersRepository } from 'apps/auth/src/domain/repositories/user-repository.interface';
 import type { FindOneOptions, FindOptionsWhere } from 'typeorm';
 import type { UserEntity } from '../entities/user.entity';
 

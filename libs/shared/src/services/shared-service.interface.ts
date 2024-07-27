@@ -1,6 +1,7 @@
 import type { RmqContext, RmqOptions } from '@nestjs/microservices';
 
-export interface SharedServiceInterface {
+// biome-ignore lint/style/useNamingConvention: ISharedService
+export interface ISharedService {
   getRmqOptions(queue: string): RmqOptions;
   acknowledgeMessage(context: RmqContext): void;
 }
