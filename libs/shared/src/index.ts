@@ -65,11 +65,10 @@
 // };
 
 import { DbEntity } from './entities/db-entity';
-import { PostgresDbModule } from './modules/postgresdb.module';
 import { SharedModule } from './modules/shared.module';
 import { DatabaseRepository } from './repositories/database-repository';
 import { IDatabaseRepository } from './repositories/database-repository.interface';
 import { SharedService } from './services/shared.service';
 import { IUseCase } from './useCases/usecases.interface';
 
-export { DatabaseRepository, DbEntity, IDatabaseRepository, IUseCase, PostgresDbModule, SharedModule, SharedService };
+export { DatabaseRepository, DbEntity, IDatabaseRepository, IUseCase, SharedModule, SharedService };

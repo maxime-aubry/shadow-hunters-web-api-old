@@ -4,39 +4,16 @@ import { DbEntity } from '../../../../../../libs/shared/src/entities/db-entity';
 
 @Entity('user')
 export class UserEntity extends DbEntity {
-  constructor(
-    id: string,
-    firstName: string,
-    lastName: string,
-    userName: string,
-    email: string,
-    password: string | null,
-    createdDate: Date,
-    updatedDate: Date,
-    lastLogin: Date | undefined,
-    hashRefreshToken: string,
-  ) {
+  constructor(id: string, userName: string, email: string, password: string | null) {
     super(id);
-    this.firstName = firstName;
-    this.lastName = lastName;
     this.userName = userName;
     this.email = email;
     this.password = password;
-    this.createdDate = createdDate;
-    this.updatedDate = updatedDate;
-    this.lastLogin = lastLogin;
-    this.hashRefreshToken = hashRefreshToken;
+    this.createdDate = new Date();
+    this.updatedDate = new Date();
+    this.lastLogin = null;
+    this.hashRefreshToken = null;
   }
-
-  @AutoMap()
-  @Column()
-  @Column('varchar', { length: 50 })
-  firstName: string;
-
-  @AutoMap()
-  @Column()
-  @Column('varchar', { length: 50 })
-  lastName: string;
 
   @AutoMap()
   @Column()
@@ -63,9 +40,9 @@ export class UserEntity extends DbEntity {
 
   @AutoMap()
   @Column({ nullable: true })
-  lastLogin?: Date;
+  lastLogin: Date | null;
 
   @AutoMap()
   @Column('varchar', { nullable: true })
-  hashRefreshToken: string;
+  hashRefreshToken: string | null;
 }

@@ -6,6 +6,15 @@ import type { UserEntity } from '../entities/user.entity';
 
 @Injectable()
 export class DatabaseUserRepository extends DatabaseRepository<UserEntity> implements IUsersRepository {
+  public async getUserByEmail(email: string): Promise<UserEntity | null> {
+    const filter: FindOneOptions<UserEntity> = {
+      where: {
+        email,
+      } as FindOptionsWhere<UserEntity>,
+    };
+    return await this.findByCondition(filter);
+  }
+
   public async getUserByUsername(userName: string): Promise<UserEntity | null> {
     const filter: FindOneOptions<UserEntity> = {
       where: {

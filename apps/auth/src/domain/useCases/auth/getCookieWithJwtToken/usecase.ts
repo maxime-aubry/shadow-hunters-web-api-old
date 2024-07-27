@@ -1,4 +1,5 @@
 import type { IUseCase } from '@app/shared';
+import { Inject } from '@nestjs/common';
 import type { IJwtService, IJwtServicePayload } from '../../../adapters/jwt.interface';
 import type { JWTConfig } from '../../../config/jwt.interface';
 import type { ILogger } from '../../../logger/logger.interface';
@@ -9,9 +10,9 @@ export class GetCookieWithJwtTokenUseCase
   implements IUseCase<GetCookieWithJwtTokenUseCaseRequest, GetCookieWithJwtTokenUseCaseResponse>
 {
   constructor(
-    private readonly logger: ILogger,
-    private readonly jwtTokenService: IJwtService,
-    private readonly jwtConfig: JWTConfig,
+    @Inject() private readonly jwtConfig: JWTConfig,
+    @Inject() private readonly jwtTokenService: IJwtService,
+    @Inject() private readonly logger: ILogger,
   ) {}
 
   public execute(request: GetCookieWithJwtTokenUseCaseRequest): GetCookieWithJwtTokenUseCaseResponse {

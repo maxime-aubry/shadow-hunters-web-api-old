@@ -1,4 +1,5 @@
 import type { IUseCase } from '@app/shared';
+import { Inject } from '@nestjs/common';
 import type { UserEntity } from 'apps/auth/src/infrastructure/database/entities/user.entity';
 import type { DatabaseUserRepository } from 'apps/auth/src/infrastructure/database/repositories/user.repository';
 import type { IBcryptService } from '../../../adapters/bcrypt.interface';
@@ -10,8 +11,8 @@ export class GetUserIfRefreshTokenMatchesUseCase
   implements IUseCase<GetUserIfRefreshTokenMatchesUseCaseRequest, Promise<GetUserIfRefreshTokenMatchesUseCaseResponse>>
 {
   constructor(
-    private readonly userRepository: DatabaseUserRepository,
-    private readonly bcryptService: IBcryptService,
+    @Inject() private readonly bcryptService: IBcryptService,
+    @Inject() private readonly userRepository: DatabaseUserRepository,
   ) {}
 
   public async execute(
@@ -23,7 +24,7 @@ export class GetUserIfRefreshTokenMatchesUseCase
 
     const isRefreshTokenMatching: boolean = await this.bcryptService.compare(
       request.refreshToken,
-      user.hashRefreshToken,
+      user.hashRefreshToken ?? '',
     );
     const response: GetUserIfRefreshTokenMatchesUseCaseResponse = new GetUserIfRefreshTokenMatchesUseCaseResponse(
       isRefreshTokenMatching ? user : null,

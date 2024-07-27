@@ -1,4 +1,5 @@
 import type { IUseCase } from '@app/shared';
+import { Inject } from '@nestjs/common';
 import type { UserEntity } from 'apps/auth/src/infrastructure/database/entities/user.entity';
 import type { DatabaseUserRepository } from 'apps/auth/src/infrastructure/database/repositories/user.repository';
 import type { IBcryptService } from '../../../adapters/bcrypt.interface';
@@ -13,11 +14,11 @@ export class GetCookieWithJwtRefreshTokenUseCase
   implements IUseCase<GetCookieWithJwtRefreshTokenUseCaseRequest, Promise<GetCookieWithJwtRefreshTokenUseCaseResponse>>
 {
   constructor(
-    private readonly logger: ILogger,
-    private readonly jwtTokenService: IJwtService,
-    private readonly jwtConfig: JWTConfig,
-    private readonly userRepository: DatabaseUserRepository,
-    private readonly bcryptService: IBcryptService,
+    @Inject() private readonly bcryptService: IBcryptService,
+    @Inject() private readonly jwtConfig: JWTConfig,
+    @Inject() private readonly jwtTokenService: IJwtService,
+    @Inject() private readonly logger: ILogger,
+    @Inject() private readonly userRepository: DatabaseUserRepository,
   ) {}
 
   public async execute(

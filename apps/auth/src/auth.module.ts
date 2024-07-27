@@ -1,10 +1,9 @@
-import { PostgresDbModule, SharedModule, SharedService } from '@app/shared';
+import { SharedModule, SharedService } from '@app/shared';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthController } from './application/controllers/auth.controller';
-import { UserEntity } from './infrastructure/database/entities/user.entity';
+import { AuthController } from './application/controllers/auth/auth.controller';
+import { AuthUseCasesModule } from './domain/useCases/auth-usecases-proxy.module';
 
 @Module({
   imports: [
@@ -16,8 +15,8 @@ import { UserEntity } from './infrastructure/database/entities/user.entity';
       inject: [ConfigService],
     }),
     SharedModule,
-    PostgresDbModule,
-    TypeOrmModule.forFeature([UserEntity]),
+    AuthUseCasesModule,
+    // TypeOrmModule.forFeature([UserEntity]),
   ],
   controllers: [AuthController],
   providers: [
