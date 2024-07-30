@@ -2,7 +2,12 @@ import { Module } from '@nestjs/common';
 import { BcryptService } from './bcrypt.service';
 
 @Module({
-  providers: [BcryptService],
+  providers: [
+    {
+      provide: 'IBcryptService',
+      useClass: BcryptService,
+    },
+  ],
   exports: [BcryptService],
 })
 export class BcryptModule {}

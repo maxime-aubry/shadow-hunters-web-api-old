@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import type { IFacebookOauthConfig } from 'apps/auth/src/domain/adapters/config/facebook-oauth-config.interface';
+import type { IGoogleOauthConfig } from 'apps/auth/src/domain/adapters/config/google-oauth-config.interface';
+import type { IJWTConfig } from 'apps/auth/src/domain/adapters/config/jwt-config.interface';
 import type { DatabaseConfig } from 'apps/auth/src/domain/config/database.interface';
-import type { IFacebookOauthConfig } from 'apps/auth/src/domain/config/facebook-oauth-config.interface';
-import type { IGoogleOauthConfig } from 'apps/auth/src/domain/config/google-oauth-config.interface';
-import type { IJWTConfig } from 'apps/auth/src/domain/config/jwt-config.interface';
 
 @Injectable()
 export class EnvironmentConfigService implements DatabaseConfig, IJWTConfig, IGoogleOauthConfig, IFacebookOauthConfig {

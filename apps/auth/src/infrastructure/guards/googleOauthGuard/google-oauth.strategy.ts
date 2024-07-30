@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import type { IGoogleOauthConfig } from 'apps/auth/src/domain/config/google-oauth-config.interface';
+import type { IGoogleOauthConfig } from 'apps/auth/src/domain/adapters/config/google-oauth-config.interface';
 import { OAuthUserDto } from 'apps/auth/src/presentation/dtos/sign-in-oauth-user.dto';
 import { type Profile, Strategy } from 'passport-google-oauth20';
 import type { OauthAccountEmail } from '../oauth-account-email';

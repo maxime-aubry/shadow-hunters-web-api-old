@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import type { IFacebookOauthConfig } from 'apps/auth/src/domain/config/facebook-oauth-config.interface';
+import type { IFacebookOauthConfig } from 'apps/auth/src/domain/adapters/config/facebook-oauth-config.interface';
 import { OAuthUserDto } from 'apps/auth/src/presentation/dtos/sign-in-oauth-user.dto';
 import { type Profile, Strategy } from 'passport-facebook';
 import type { OauthAccountEmail } from '../oauth-account-email';

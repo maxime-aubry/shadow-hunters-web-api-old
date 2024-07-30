@@ -1,8 +1,8 @@
 import { UserEntity } from '@app/shared';
 import { OAuthCredentials } from 'apps/auth/src/infrastructure/database/entities/user.entity';
+import type { IJWTConfig } from '../../../adapters/config/jwt-config.interface';
 import type { IJwtServicePayload } from '../../../adapters/jwt-payload.interface';
 import type { IJwtService } from '../../../adapters/jwt.interface';
-import type { IJWTConfig } from '../../../config/jwt-config.interface';
 import type { IUsersRepository } from '../../../ports/out/repositories/user-repository.interface';
 import type { SignInUseCaseRequest } from './request';
 import { SignInUseCaseResponse } from './response';

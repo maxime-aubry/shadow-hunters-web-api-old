@@ -1,5 +1,5 @@
 import { Controller, Get, Inject, Res, UseGuards } from '@nestjs/common';
-import type { IGoogleOauthConfig } from 'apps/auth/src/domain/config/google-oauth-config.interface';
+import type { IGoogleOauthConfig } from 'apps/auth/src/domain/adapters/config/google-oauth-config.interface';
 import type { IOAuthUseCases } from 'apps/auth/src/domain/ports/in/usecases/oauth-use-cases.interface';
 import { SignInUseCaseRequest } from 'apps/auth/src/domain/useCases/oAuth/signIn/request';
 import type { SignInUseCaseResponse } from 'apps/auth/src/domain/useCases/oAuth/signIn/response';

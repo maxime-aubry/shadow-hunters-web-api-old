@@ -9,7 +9,12 @@ import { JwtTokenService } from './jwt.service';
       signOptions: { expiresIn: '24h' },
     }),
   ],
-  providers: [JwtTokenService],
+  providers: [
+    {
+      provide: 'IJwtService',
+      useClass: JwtTokenService,
+    },
+  ],
   exports: [JwtTokenService],
 })
 export class JwtModule {}
