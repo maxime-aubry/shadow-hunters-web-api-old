@@ -39,55 +39,43 @@ class EnvironmentVariables {
   }
 
   @IsEnum(Environment)
-  // biome-ignore lint/style/useNamingConvention: NODE_ENV
   NODE_ENV: Environment;
 
   @IsString()
-  // biome-ignore lint/style/useNamingConvention: JWT_SECRET
   JWT_SECRET: string;
 
   @IsString()
-  // biome-ignore lint/style/useNamingConvention: JWT_EXPIRATION_TIME
   JWT_EXPIRATION_TIME: string;
 
   @IsString()
-  // biome-ignore lint/style/useNamingConvention: JWT_REFRESH_TOKEN_SECRET
   JWT_REFRESH_TOKEN_SECRET: string;
 
   @IsString()
-  // biome-ignore lint/style/useNamingConvention: JWT_REFRESH_TOKEN_EXPIRATION_TIME
   JWT_REFRESH_TOKEN_EXPIRATION_TIME: string;
 
   @IsString()
-  // biome-ignore lint/style/useNamingConvention: DATABASE_HOST
   DATABASE_HOST: string;
 
   @IsNumber()
-  // biome-ignore lint/style/useNamingConvention: DATABASE_PORT
   DATABASE_PORT: number;
 
   @IsString()
-  // biome-ignore lint/style/useNamingConvention: DATABASE_USER
   DATABASE_USER: string;
 
   @IsString()
-  // biome-ignore lint/style/useNamingConvention: DATABASE_PASSWORD
   DATABASE_PASSWORD: string;
 
   @IsString()
-  // biome-ignore lint/style/useNamingConvention: DATABASE_NAME
   DATABASE_NAME: string;
 
   @IsString()
-  // biome-ignore lint/style/useNamingConvention: DATABASE_SCHEMA
   DATABASE_SCHEMA: string;
 
   @IsBoolean()
-  // biome-ignore lint/style/useNamingConvention: DATABASE_SYNCHRONIZE
   DATABASE_SYNCHRONIZE: boolean;
 }
 
-export function validate(config: Record<string, unknown>) {
+export function validate(config: Record<string, unknown>): EnvironmentVariables {
   const validatedConfig: EnvironmentVariables = plainToClass(EnvironmentVariables, config, {
     enableImplicitConversion: true,
   });

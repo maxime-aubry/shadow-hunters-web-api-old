@@ -6,11 +6,11 @@ import { compare, hash } from 'bcrypt';
 export class BcryptService implements IBcryptService {
   rounds = 10;
 
-  public async hash(hashString: string): Promise<string> {
+  public async hashAsync(hashString: string): Promise<string> {
     return await hash(hashString, this.rounds);
   }
 
-  public async compare(password: string, hashPassword: string): Promise<boolean> {
+  public async compareAsync(password: string, hashPassword: string): Promise<boolean> {
     return await compare(password, hashPassword);
   }
 }

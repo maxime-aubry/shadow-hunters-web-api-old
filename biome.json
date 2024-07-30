@@ -40,13 +40,13 @@
         "noParameterProperties": "off",
         "useBlockStatements": "off",
         "useCollapsedElseIf": "error",
-        "useFilenamingConvention": { "level": "error", "options": {} },
+        "useFilenamingConvention": "error",
         "useForOf": "error",
-        "useNamingConvention": { "level": "warn", "options": {} },
+        "useNamingConvention": "off",
         "useShorthandAssign": "error"
       },
       "suspicious": {
-        "noConsoleLog": "off",
+        "noConsoleLog": "error",
         "noEmptyBlockStatements": "off",
         "noExplicitAny": "off",
         "noSkippedTests": "error",

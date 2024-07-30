@@ -2,26 +2,25 @@ import { SharedModule, SharedService } from '@app/shared';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthController } from './application/controllers/auth/auth.controller';
-import { AuthUseCasesModule } from './domain/useCases/auth-usecases-proxy.module';
+import { AuthUseCasesModule } from './domain/useCases/auth-usecases.module';
+import { LocalAuthController } from './presentation/controllers/localAuth/local-auth.controller';
 
 @Module({
   imports: [
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => ({
-        secret: configService.get('JWT_SECRET'),
+        secret: configService.get<string>('JWT_SECRET'),
         signOptions: { expiresIn: '3600s' },
       }),
       inject: [ConfigService],
     }),
     SharedModule,
     AuthUseCasesModule,
-    // TypeOrmModule.forFeature([UserEntity]),
   ],
-  controllers: [AuthController],
+  controllers: [LocalAuthController],
   providers: [
     {
-      provide: 'SharedServiceInterface',
+      provide: 'ISharedService',
       useClass: SharedService,
     },
   ],

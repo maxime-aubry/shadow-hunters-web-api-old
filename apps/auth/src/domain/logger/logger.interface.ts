@@ -1,4 +1,3 @@
-// biome-ignore lint/style/useNamingConvention: ILogger
 export interface ILogger {
   debug(context: string, message: string): void;
   log(context: string, message: string): void;

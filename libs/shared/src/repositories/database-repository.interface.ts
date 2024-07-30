@@ -1,6 +1,5 @@
 import type { DeepPartial, FindManyOptions, FindOneOptions } from 'typeorm';
 
-// biome-ignore lint/style/useNamingConvention: IGenericRepository
 export interface IDatabaseRepository<TEntity> {
   create(data: DeepPartial<TEntity>): TEntity;
   createMany(data: DeepPartial<TEntity>[]): TEntity[];

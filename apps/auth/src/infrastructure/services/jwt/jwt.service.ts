@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import type { JwtService } from '@nestjs/jwt';
-import type { IJwtService, IJwtServicePayload } from '../../../domain/adapters/jwt.interface';
+import { Inject, Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import type { IJwtServicePayload } from 'apps/auth/src/domain/adapters/jwt-payload.interface';
+import type { IJwtService } from '../../../domain/adapters/jwt.interface';
 
 @Injectable()
 export class JwtTokenService implements IJwtService {
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(@Inject(JwtService) private readonly jwtService: JwtService) {}
 
   public async checkToken(token: string): Promise<any> {
     const decode = await this.jwtService.verifyAsync(token);

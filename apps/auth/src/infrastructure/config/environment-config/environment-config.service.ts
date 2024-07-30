@@ -1,26 +1,60 @@
-import { Injectable } from '@nestjs/common';
-import type { ConfigService } from '@nestjs/config';
+import { Inject, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import type { DatabaseConfig } from 'apps/auth/src/domain/config/database.interface';
-import type { JWTConfig } from 'apps/auth/src/domain/config/jwt.interface';
+import type { IFacebookOauthConfig } from 'apps/auth/src/domain/config/facebook-oauth-config.interface';
+import type { IGoogleOauthConfig } from 'apps/auth/src/domain/config/google-oauth-config.interface';
+import type { IJWTConfig } from 'apps/auth/src/domain/config/jwt-config.interface';
 
 @Injectable()
-export class EnvironmentConfigService implements DatabaseConfig, JWTConfig {
-  constructor(private configService: ConfigService) {}
+export class EnvironmentConfigService implements DatabaseConfig, IJWTConfig, IGoogleOauthConfig, IFacebookOauthConfig {
+  constructor(@Inject(ConfigService) private readonly configService: ConfigService) {}
 
-  public getJwtSecret(): string | undefined {
-    return this.configService.get<string>('JWT_SECRET');
+  public getJwtSecret(): string {
+    return this.configService.get<string>('JWT_SECRET') ?? '';
   }
 
-  public getJwtExpirationTime(): string | undefined {
-    return this.configService.get<string>('JWT_EXPIRATION_TIME');
+  public getJwtExpirationTime(): string {
+    return `${this.configService.get<string>('JWT_EXPIRATION_TIME') ?? 0}s`;
   }
 
-  public getJwtRefreshSecret(): string | undefined {
-    return this.configService.get<string>('JWT_REFRESH_TOKEN_SECRET');
+  public getJwtRefreshSecret(): string {
+    return this.configService.get<string>('JWT_REFRESH_TOKEN_SECRET') ?? '';
   }
 
-  public getJwtRefreshExpirationTime(): string | undefined {
-    return this.configService.get<string>('JWT_REFRESH_TOKEN_EXPIRATION_TIME');
+  public getFacebookId(): string {
+    return this.configService.get<string>('OAUTH_FACEBOOK_CLIENT_ID') ?? '';
+  }
+
+  public getFacebookSecret(): string {
+    return this.configService.get<string>('OAUTH_FACEBOOK_CLIENT_SECRET') ?? '';
+  }
+
+  public getFacebookRedicretUrl(): string {
+    return this.configService.get<string>('OAUTH_FACEBOOK_REDIRECT_URL') ?? '';
+  }
+
+  public getFacebookExpirationTime(): number {
+    return this.configService.get<number>('OAUTH_FACEBOOK_EXPIRATION_TIME') ?? 0;
+  }
+
+  public getGoogleId(): string {
+    return this.configService.get<string>('OAUTH_GOOGLE_ID') ?? '';
+  }
+
+  public getGoogleSecret(): string {
+    return this.configService.get<string>('OAUTH_GOOGLE_SECRET') ?? '';
+  }
+
+  public getGoogleRedicretUrl(): string {
+    return this.configService.get<string>('OAUTH_GOOGLE_REDIRECT_URL') ?? '';
+  }
+
+  public getGoogleExpirationTime(): number {
+    return this.configService.get<number>('OAUTH_GOOGLE_EXPIRATION_TIME') ?? 0;
+  }
+
+  public getJwtRefreshExpirationTime(): string {
+    return `${this.configService.get<string>('JWT_REFRESH_TOKEN_EXPIRATION_TIME') ?? 0}s`;
   }
 
   public getDatabaseHost(): string | undefined {

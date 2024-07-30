@@ -1,5 +1,4 @@
-// biome-ignore lint/style/useNamingConvention: IBcryptService
 export interface IBcryptService {
-  hash(hashString: string): Promise<string>;
-  compare(password: string, hashPassword: string): Promise<boolean>;
+  hashAsync(hashString: string): Promise<string>;
+  compareAsync(password: string, hashPassword: string): Promise<boolean>;
 }

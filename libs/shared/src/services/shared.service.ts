@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import type { ConfigService } from '@nestjs/config';
+import { Inject, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { type RmqContext, type RmqOptions, Transport } from '@nestjs/microservices';
 import { SharedServiceException } from '../exceptions/shared-service-exception';
 import type { ISharedService } from './shared-service.interface';
 
 @Injectable()
 export class SharedService implements ISharedService {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(@Inject(ConfigService) private readonly configService: ConfigService) {}
 
   public getRmqOptions(queue: string): RmqOptions {
     const user: string | undefined = this.configService.get<string>('RABBITMQ_USER');

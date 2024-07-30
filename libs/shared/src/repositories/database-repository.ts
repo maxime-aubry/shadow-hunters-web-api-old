@@ -2,7 +2,6 @@ import type { DbEntity } from '@app/shared/entities/db-entity';
 import type { DeepPartial, FindManyOptions, FindOneOptions, FindOptionsWhere, Repository } from 'typeorm';
 import type { IDatabaseRepository } from './database-repository.interface';
 
-// biome-ignore lint/style/useNamingConvention: TEntity
 export class DatabaseRepository<TEntity extends DbEntity> implements IDatabaseRepository<TEntity> {
   private entity: Repository<TEntity>;
 
