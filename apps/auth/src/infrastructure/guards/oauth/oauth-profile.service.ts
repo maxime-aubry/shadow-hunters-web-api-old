@@ -1,4 +1,4 @@
-import { AuthGuardException } from '../exceptions/auth-guard.exception';
+import { AuthGuardException } from '../../exceptions/auth-guard.exception';
 import type { OauthAccountEmail } from './oauth-account-email';
 import type { OauthAccountOwner } from './oauth-account-owner';
 

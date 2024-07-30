@@ -17,7 +17,24 @@ const ignoreEnvFile = (): boolean => {
       validate,
     }),
   ],
-  providers: [EnvironmentConfigService],
-  exports: [EnvironmentConfigService],
+  providers: [
+    {
+      provide: 'IDatabaseConfig',
+      useClass: EnvironmentConfigService,
+    },
+    {
+      provide: 'IJwtConfig',
+      useClass: EnvironmentConfigService,
+    },
+    {
+      provide: 'IGoogleOauthConfig',
+      useClass: EnvironmentConfigService,
+    },
+    {
+      provide: 'IFacebookOauthConfig',
+      useClass: EnvironmentConfigService,
+    },
+  ],
+  exports: ['IDatabaseConfig', 'IJwtConfig', 'IGoogleOauthConfig', 'IFacebookOauthConfig'],
 })
 export class EnvironmentConfigModule {}

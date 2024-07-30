@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule, type TypeOrmModuleOptions } from '@nestjs/typeorm';
+import type { IDatabaseConfig } from 'apps/auth/src/domain/adapters/config/database-config.interface';
 import { EnvironmentConfigModule } from '../environment-config/environment-config.module';
-import { EnvironmentConfigService } from '../environment-config/environment-config.service';
 
-export const getTypeOrmModuleOptions = (config: EnvironmentConfigService): TypeOrmModuleOptions =>
+export const getTypeOrmModuleOptions = (config: IDatabaseConfig): TypeOrmModuleOptions =>
   ({
     type: 'postgres',
     host: config.getDatabaseHost(),
@@ -25,7 +25,7 @@ export const getTypeOrmModuleOptions = (config: EnvironmentConfigService): TypeO
   imports: [
     TypeOrmModule.forRootAsync({
       imports: [EnvironmentConfigModule],
-      inject: [EnvironmentConfigService],
+      inject: ['IDatabaseConfig'],
       useFactory: getTypeOrmModuleOptions,
     }),
   ],

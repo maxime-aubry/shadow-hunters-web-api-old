@@ -1,4 +1,4 @@
-import type { AuthProvider } from '../database/entities/user.entity';
+import type { AuthProvider } from '../../database/entities/user.entity';
 
 export class OAuthUser {
   constructor(

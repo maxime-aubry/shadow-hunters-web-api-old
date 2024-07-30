@@ -8,6 +8,6 @@ import { BcryptService } from './bcrypt.service';
       useClass: BcryptService,
     },
   ],
-  exports: [BcryptService],
+  exports: ['IBcryptService'],
 })
 export class BcryptModule {}

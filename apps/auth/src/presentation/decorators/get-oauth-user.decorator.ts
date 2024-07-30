@@ -1,6 +1,6 @@
 import { type ExecutionContext, createParamDecorator } from '@nestjs/common';
 import type { HttpArgumentsHost } from '@nestjs/common/interfaces';
-import type { OAuthUser } from '../../infrastructure/guards/oauth-user';
+import type { OAuthUser } from '../../infrastructure/guards/oauth/oauth-user';
 
 export const GetOauthUser = createParamDecorator((_, context: ExecutionContext): OAuthUser => {
   const args: HttpArgumentsHost = context.switchToHttp();

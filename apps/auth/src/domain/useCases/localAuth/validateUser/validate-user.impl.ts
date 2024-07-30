@@ -1,6 +1,6 @@
 import { UserEntity } from '@app/shared';
-import type { IBcryptService } from '../../../adapters/bcrypt.interface';
-import type { IAuthMappersService } from '../../../mappers/auth-mappers-service.interface';
+import type { IAuthMappersService } from 'apps/auth/src/infrastructure/mappers/auth-mappers-service.interface';
+import type { IBcryptService } from '../../../adapters/services/bcrypt/bcrypt.interface';
 import { User } from '../../../models/user.model';
 import type { IUsersRepository } from '../../../ports/out/repositories/user-repository.interface';
 import type { ValidateUserForLocalStrategyUseCaseRequest } from './request';

@@ -1,4 +1,4 @@
-export interface IJWTConfig {
+export interface IJwtConfig {
   getJwtSecret(): string;
   getJwtExpirationTime(): string;
   getJwtRefreshSecret(): string;

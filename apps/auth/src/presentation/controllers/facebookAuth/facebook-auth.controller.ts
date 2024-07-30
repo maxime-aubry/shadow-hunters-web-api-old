@@ -3,8 +3,8 @@ import type { IFacebookOauthConfig } from 'apps/auth/src/domain/adapters/config/
 import type { IOAuthUseCases } from 'apps/auth/src/domain/ports/in/usecases/oauth-use-cases.interface';
 import { SignInUseCaseRequest } from 'apps/auth/src/domain/useCases/oAuth/signIn/request';
 import type { SignInUseCaseResponse } from 'apps/auth/src/domain/useCases/oAuth/signIn/response';
-import { FacebookAuthGuard } from 'apps/auth/src/infrastructure/guards/facebookOauthGuard/facebook-oauth.guard';
 import type { OAuthUser } from 'apps/auth/src/infrastructure/guards/oauth-user';
+import { FacebookAuthGuard } from 'apps/auth/src/infrastructure/guards/oauth/facebookOauthGuard/facebook-oauth.guard';
 import type { Response } from 'express';
 import { GetOauthUser } from '../../decorators/get-oauth-user.decorator';
 

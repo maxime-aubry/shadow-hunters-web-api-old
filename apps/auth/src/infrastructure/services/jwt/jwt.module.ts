@@ -15,6 +15,6 @@ import { JwtTokenService } from './jwt.service';
       useClass: JwtTokenService,
     },
   ],
-  exports: [JwtTokenService],
+  exports: ['IJwtService'],
 })
 export class JwtModule {}

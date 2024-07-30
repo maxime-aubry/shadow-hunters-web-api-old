@@ -1,8 +1,8 @@
 import { UserEntity } from '@app/shared';
 import { OAuthCredentials } from 'apps/auth/src/infrastructure/database/entities/user.entity';
-import type { IJWTConfig } from '../../../adapters/config/jwt-config.interface';
-import type { IJwtServicePayload } from '../../../adapters/jwt-payload.interface';
-import type { IJwtService } from '../../../adapters/jwt.interface';
+import type { IJwtConfig } from '../../../adapters/config/jwt-config.interface';
+import type { IJwtServicePayload } from '../../../adapters/services/jwt/jwt-payload.interface';
+import type { IJwtService } from '../../../adapters/services/jwt/jwt-service.interface';
 import type { IUsersRepository } from '../../../ports/out/repositories/user-repository.interface';
 import type { SignInUseCaseRequest } from './request';
 import { SignInUseCaseResponse } from './response';
@@ -10,7 +10,7 @@ import type { ISignInUseCase } from './sign-in.interface';
 
 export class SignInUseCaseImpl implements ISignInUseCase {
   constructor(
-    private readonly jwtConfig: IJWTConfig,
+    private readonly jwtConfig: IJwtConfig,
     private readonly jwtService: IJwtService,
     private readonly userRepository: IUsersRepository,
   ) {}
