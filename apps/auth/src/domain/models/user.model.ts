@@ -1,42 +1,26 @@
 import { AutoMap } from '@automapper/classes';
 
 export class User {
-  constructor(
-    id: number,
-    username: string,
-    createdDate: Date,
-    updatedDate: Date,
-    lastLogin: Date,
-    hashRefreshToken: string,
-    password: string,
-  ) {
+  constructor(id: string, firstname: string, lastname: string, username: string, email: string) {
     this.id = id;
+    this.firstname = firstname;
+    this.lastname = lastname;
     this.username = username;
-    this.createdDate = createdDate;
-    this.updatedDate = updatedDate;
-    this.lastLogin = lastLogin;
-    this.hashRefreshToken = hashRefreshToken;
-    this.password = password;
+    this.email = email;
   }
 
   @AutoMap()
-  public id: number;
+  public id: string;
+
+  @AutoMap()
+  public firstname: string;
+
+  @AutoMap()
+  public lastname: string;
 
   @AutoMap()
   public username: string;
 
   @AutoMap()
-  public createdDate: Date;
-
-  @AutoMap()
-  public updatedDate: Date;
-
-  @AutoMap()
-  public lastLogin: Date;
-
-  @AutoMap()
-  public hashRefreshToken: string;
-
-  @AutoMap()
-  public password: string;
+  public email: string;
 }

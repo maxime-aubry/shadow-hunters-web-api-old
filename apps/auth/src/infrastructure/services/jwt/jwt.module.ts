@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { JwtModule as Jwt } from '@nestjs/jwt';
-import { JwtTokenService } from './jwt.service';
+import { JwtRefreshTokenGeneratorServiceImpl } from './jwt-refresh-token-generator-service.impl';
+import { JwtTokenGeneratorServiceImpl } from './jwt-token-generator-service.impl';
 
 @Module({
   imports: [
@@ -11,10 +12,14 @@ import { JwtTokenService } from './jwt.service';
   ],
   providers: [
     {
-      provide: 'IJwtService',
-      useClass: JwtTokenService,
+      provide: 'IJwtTokenGenerator',
+      useClass: JwtTokenGeneratorServiceImpl,
+    },
+    {
+      provide: 'IJwtRefreshTokenGenerator',
+      useClass: JwtRefreshTokenGeneratorServiceImpl,
     },
   ],
-  exports: ['IJwtService'],
+  exports: ['IJwtTokenGenerator', 'IJwtRefreshTokenGenerator'],
 })
 export class JwtModule {}

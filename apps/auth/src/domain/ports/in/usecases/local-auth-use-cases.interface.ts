@@ -1,7 +1,7 @@
-import type { ISignUpForLocalStrategyUseCase } from '../../../useCases/localAuth/signUp/sign-up.interface';
-import type { IValidateUserForLocalStrategyUseCase } from '../../../useCases/localAuth/validateUser/validate-user.interface';
+import type { ISignInForLocalStrategyUseCase } from '../../../useCases/localAuth/sign-in/sign-in.interface';
+import type { ISignUpForLocalStrategyUseCase } from '../../../useCases/localAuth/sign-up/sign-up.interface';
 
 export interface ILocalAuthUseCases {
   readonly signUp: ISignUpForLocalStrategyUseCase;
-  readonly validateUser: IValidateUserForLocalStrategyUseCase;
+  readonly signIn: ISignInForLocalStrategyUseCase;
 }

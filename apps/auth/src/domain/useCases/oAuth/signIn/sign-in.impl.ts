@@ -1,22 +1,22 @@
 import { UserEntity } from '@app/shared';
 import { OAuthCredentials } from 'apps/auth/src/infrastructure/database/entities/user.entity';
-import type { IJwtConfig } from '../../../adapters/config/jwt-config.interface';
-import type { IJwtServicePayload } from '../../../adapters/services/jwt/jwt-payload.interface';
-import type { IJwtService } from '../../../adapters/services/jwt/jwt-service.interface';
+import type { IAuthMappersService } from 'apps/auth/src/infrastructure/mappers/auth-mappers-service.interface';
+import { OAuthUser } from '../../../models/oauth-user.model';
 import type { IUsersRepository } from '../../../ports/out/repositories/user-repository.interface';
-import type { SignInUseCaseRequest } from './request';
-import { SignInUseCaseResponse } from './response';
-import type { ISignInUseCase } from './sign-in.interface';
+import type { SignInForOauthStrategyUseCaseRequest } from './request';
+import { SignInForOauthStrategyUseCaseResponse } from './response';
+import type { ISignInForOauthStrategyUseCase } from './sign-in.interface';
 
-export class SignInUseCaseImpl implements ISignInUseCase {
+export class SignInForOauthStrategyUseCaseImpl implements ISignInForOauthStrategyUseCase {
   constructor(
-    private readonly jwtConfig: IJwtConfig,
-    private readonly jwtService: IJwtService,
+    private readonly authMappersService: IAuthMappersService,
     private readonly userRepository: IUsersRepository,
   ) {}
 
-  public async executeAsync(request: SignInUseCaseRequest): Promise<SignInUseCaseResponse> {
-    const existingUser: UserEntity | null = await this.userRepository.getUserByEmail(request.email);
+  public async executeAsync(
+    request: SignInForOauthStrategyUseCaseRequest,
+  ): Promise<SignInForOauthStrategyUseCaseResponse> {
+    const existingUser: UserEntity | null = await this.userRepository.getUserByEmailAsync(request.email);
 
     if (!existingUser) {
       const credentials: OAuthCredentials = new OAuthCredentials(request.provider, request.providerId);
@@ -28,24 +28,14 @@ export class SignInUseCaseImpl implements ISignInUseCase {
         request.email,
         credentials,
       );
-      const savedUser: UserEntity = this.userRepository.create(newUser);
-      return this.generateResponse(savedUser);
+      const savedUser: UserEntity = await this.userRepository.createAsync(newUser);
+      return new SignInForOauthStrategyUseCaseResponse(
+        this.authMappersService.mapper.map(savedUser, UserEntity, OAuthUser),
+      );
     }
 
-    return this.generateResponse(existingUser);
-  }
-
-  private generateResponse(user: UserEntity): SignInUseCaseResponse {
-    const jwtPayload: IJwtServicePayload = {
-      userId: user.id,
-      username: user.username,
-    };
-    const token: string = this.jwtService.createToken(
-      jwtPayload,
-      this.jwtConfig.getJwtSecret(),
-      this.jwtConfig.getJwtExpirationTime(),
+    return new SignInForOauthStrategyUseCaseResponse(
+      this.authMappersService.mapper.map(existingUser, UserEntity, OAuthUser),
     );
-    const response: SignInUseCaseResponse = new SignInUseCaseResponse(token);
-    return response;
   }
 }

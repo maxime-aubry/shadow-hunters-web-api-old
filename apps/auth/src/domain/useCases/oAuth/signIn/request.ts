@@ -1,6 +1,6 @@
 import type { AuthProvider } from 'apps/auth/src/infrastructure/database/entities/user.entity';
 
-export class SignInUseCaseRequest {
+export class SignInForOauthStrategyUseCaseRequest {
   constructor(
     provider: AuthProvider,
     providerId: string,

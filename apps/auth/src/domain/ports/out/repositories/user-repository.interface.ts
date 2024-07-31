@@ -1,9 +1,10 @@
-import type { IDatabaseRepository } from '@app/shared';
+import type { DeepPartial } from 'typeorm';
 import type { UserEntity } from '../../../../infrastructure/database/entities/user.entity';
 
-export interface IUsersRepository extends IDatabaseRepository<UserEntity> {
-  getUserByEmail(email: string): Promise<UserEntity | null>;
-  getUserByUserName(username: string): Promise<UserEntity | null>;
-  getUserByCredentials(username: string, password: string): Promise<UserEntity | null>;
-  updateRefreshToken(user: UserEntity, refreshToken: string): Promise<void>;
+export interface IUsersRepository {
+  createAsync(user: DeepPartial<UserEntity>): Promise<UserEntity>;
+  getUserByEmailAsync(email: string): Promise<UserEntity | null>;
+  getUserByEmailOrUsernameAsync(emailOrUsername: string): Promise<UserEntity | null>;
+  updateLastLoginAsync(user: UserEntity): Promise<void>;
+  updateRefreshTokenAsync(user: UserEntity, refreshToken: string): Promise<void>;
 }

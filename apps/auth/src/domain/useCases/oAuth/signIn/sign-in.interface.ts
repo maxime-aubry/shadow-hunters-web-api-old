@@ -1,5 +1,6 @@
 import type { IUseCaseAsync } from '@app/shared/useCases/usecases-async.interface';
-import type { SignInUseCaseRequest } from './request';
-import type { SignInUseCaseResponse } from './response';
+import type { SignInForOauthStrategyUseCaseRequest } from './request';
+import type { SignInForOauthStrategyUseCaseResponse } from './response';
 
-export interface ISignInUseCase extends IUseCaseAsync<SignInUseCaseRequest, SignInUseCaseResponse> {}
+export interface ISignInForOauthStrategyUseCase
+  extends IUseCaseAsync<SignInForOauthStrategyUseCaseRequest, SignInForOauthStrategyUseCaseResponse> {}

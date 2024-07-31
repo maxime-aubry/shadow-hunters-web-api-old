@@ -12,8 +12,8 @@ export class EnvironmentConfigService implements IDatabaseConfig, IJwtConfig, IG
     return this.configService.get<string>('JWT_SECRET') ?? '';
   }
 
-  public getJwtExpirationTime(): string {
-    return `${this.configService.get<string>('JWT_EXPIRATION_TIME') ?? 0}s`;
+  public getJwtExpirationTime(): number {
+    return this.configService.get<number>('JWT_EXPIRATION_TIME') ?? 0;
   }
 
   public getJwtRefreshSecret(): string {
@@ -36,8 +36,8 @@ export class EnvironmentConfigService implements IDatabaseConfig, IJwtConfig, IG
     return this.configService.get<number>('OAUTH_GOOGLE_EXPIRATION_TIME') ?? 0;
   }
 
-  public getJwtRefreshExpirationTime(): string {
-    return `${this.configService.get<string>('JWT_REFRESH_TOKEN_EXPIRATION_TIME') ?? 0}s`;
+  public getJwtRefreshExpirationTime(): number {
+    return this.configService.get<number>('JWT_REFRESH_TOKEN_EXPIRATION_TIME') ?? 0;
   }
 
   public getDatabaseHost(): string | undefined {

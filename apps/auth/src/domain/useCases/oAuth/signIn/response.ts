@@ -1,7 +1,9 @@
-export class SignInUseCaseResponse {
-  constructor(token: string) {
-    this.token = token;
+import type { OAuthUser } from '../../../models/oauth-user.model';
+
+export class SignInForOauthStrategyUseCaseResponse {
+  constructor(user: OAuthUser) {
+    this.user = user;
   }
 
-  public token: string;
+  public user: OAuthUser;
 }

@@ -7,7 +7,7 @@ import { BcryptModule } from '../../infrastructure/services/bcrypt/bcrypt.module
 import { JwtModule } from '../../infrastructure/services/jwt/jwt.module';
 import { CommonAuthUseCasesImpl } from './common/common-auth-usecases';
 import { LocalAuthUseCasesImpl } from './localAuth/local-auth-usecases';
-import { OAuthUseCasesImpl } from './oAuth/oauth-usecases';
+import { OAuthUseCasesImpl } from './oauth/oauth-usecases';
 
 @Module({
   imports: [AuthMappersModule, AuthRepositoriesModule, BcryptModule, EnvironmentConfigModule, JwtModule, LoggerModule],

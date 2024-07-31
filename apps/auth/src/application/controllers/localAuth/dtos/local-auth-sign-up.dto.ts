@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class LocalAuthLoginDto {
+export class LocalAuthSignUpDto {
   constructor(firstname: string, lastname: string, username: string, email: string, password: string) {
     this.firstname = firstname;
     this.lastname = lastname;
@@ -13,25 +13,25 @@ export class LocalAuthLoginDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsString()
-  readonly firstname: string;
+  public readonly firstname: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsString()
-  readonly lastname: string;
+  public readonly lastname: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsString()
-  readonly username: string;
+  public readonly username: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsString()
-  readonly email: string;
+  public readonly email: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsString()
-  readonly password: string;
+  public readonly password: string;
 }
