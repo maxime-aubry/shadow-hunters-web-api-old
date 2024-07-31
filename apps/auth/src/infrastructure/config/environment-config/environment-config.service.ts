@@ -1,12 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import type { IDatabaseConfig } from 'apps/auth/src/domain/adapters/config/database-config.interface';
-import type { IFacebookOauthConfig } from 'apps/auth/src/domain/adapters/config/facebook-oauth-config.interface';
 import type { IGoogleOauthConfig } from 'apps/auth/src/domain/adapters/config/google-oauth-config.interface';
 import type { IJwtConfig } from 'apps/auth/src/domain/adapters/config/jwt-config.interface';
 
 @Injectable()
-export class EnvironmentConfigService implements IDatabaseConfig, IJwtConfig, IGoogleOauthConfig, IFacebookOauthConfig {
+export class EnvironmentConfigService implements IDatabaseConfig, IJwtConfig, IGoogleOauthConfig {
   constructor(@Inject(ConfigService) private readonly configService: ConfigService) {}
 
   public getJwtSecret(): string {
@@ -19,22 +18,6 @@ export class EnvironmentConfigService implements IDatabaseConfig, IJwtConfig, IG
 
   public getJwtRefreshSecret(): string {
     return this.configService.get<string>('JWT_REFRESH_TOKEN_SECRET') ?? '';
-  }
-
-  public getFacebookId(): string {
-    return this.configService.get<string>('OAUTH_FACEBOOK_CLIENT_ID') ?? '';
-  }
-
-  public getFacebookSecret(): string {
-    return this.configService.get<string>('OAUTH_FACEBOOK_CLIENT_SECRET') ?? '';
-  }
-
-  public getFacebookRedicretUrl(): string {
-    return this.configService.get<string>('OAUTH_FACEBOOK_REDIRECT_URL') ?? '';
-  }
-
-  public getFacebookExpirationTime(): number {
-    return this.configService.get<number>('OAUTH_FACEBOOK_EXPIRATION_TIME') ?? 0;
   }
 
   public getGoogleId(): string {

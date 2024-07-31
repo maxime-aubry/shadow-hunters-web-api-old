@@ -16,6 +16,10 @@ class EnvironmentVariables {
     jwtExpirationTime: string,
     jwtRefreshTokenSecret: string,
     jwtRefreshTokenExpirationTime: string,
+    oauthGoogleId: string,
+    oauthGoogleSecret: string,
+    oauthGoogleRedirectUrl: string,
+    oauthGoogleExpirationTime: number,
     databaseHost: string,
     databasePort: number,
     databaseUser: string,
@@ -29,6 +33,10 @@ class EnvironmentVariables {
     this.JWT_EXPIRATION_TIME = jwtExpirationTime;
     this.JWT_REFRESH_TOKEN_SECRET = jwtRefreshTokenSecret;
     this.JWT_REFRESH_TOKEN_EXPIRATION_TIME = jwtRefreshTokenExpirationTime;
+    this.OAUTH_GOOGLE_ID = oauthGoogleId;
+    this.OAUTH_GOOGLE_SECRET = oauthGoogleSecret;
+    this.OAUTH_GOOGLE_REDIRECT_URL = oauthGoogleRedirectUrl;
+    this.OAUTH_GOOGLE_EXPIRATION_TIME = oauthGoogleExpirationTime;
     this.DATABASE_HOST = databaseHost;
     this.DATABASE_PORT = databasePort;
     this.DATABASE_USER = databaseUser;
@@ -52,6 +60,18 @@ class EnvironmentVariables {
 
   @IsString()
   JWT_REFRESH_TOKEN_EXPIRATION_TIME: string;
+
+  @IsString()
+  OAUTH_GOOGLE_ID: string;
+
+  @IsString()
+  OAUTH_GOOGLE_SECRET: string;
+
+  @IsString()
+  OAUTH_GOOGLE_REDIRECT_URL: string;
+
+  @IsNumber()
+  OAUTH_GOOGLE_EXPIRATION_TIME: number;
 
   @IsString()
   DATABASE_HOST: string;
@@ -81,9 +101,7 @@ export function validate(config: Record<string, unknown>): EnvironmentVariables 
   });
   const errors: ValidationError[] = validateSync(validatedConfig, { skipMissingProperties: false });
 
-  if (errors.length > 0) {
-    throw new Error(errors.toString());
-  }
+  if (errors.length > 0) throw new Error(errors.toString());
 
   return validatedConfig;
 }

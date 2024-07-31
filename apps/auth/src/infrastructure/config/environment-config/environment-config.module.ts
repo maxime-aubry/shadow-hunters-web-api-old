@@ -11,7 +11,7 @@ const ignoreEnvFile = (): boolean => {
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: `./env/${process.env.NODE_ENV}.env`,
+      envFilePath: `./env/.env.${process.env.NODE_ENV}`,
       ignoreEnvFile: ignoreEnvFile(),
       isGlobal: true,
       validate,
