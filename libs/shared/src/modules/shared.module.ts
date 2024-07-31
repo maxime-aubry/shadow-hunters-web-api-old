@@ -7,7 +7,7 @@ import { SharedService } from '../services/shared.service';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `./env/${process.env.NODE_ENV}.env`,
+      envFilePath: `./env/.env.${process.env.NODE_ENV}`,
     }),
   ],
   providers: [

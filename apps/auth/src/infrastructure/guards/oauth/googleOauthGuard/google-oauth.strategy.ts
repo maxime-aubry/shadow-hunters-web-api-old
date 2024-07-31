@@ -9,7 +9,7 @@ import { OAuthUser } from '../oauth-user';
 
 @Injectable()
 export class GoogleOauthStrategy extends PassportStrategy(Strategy, 'google') {
-  constructor(@Inject() private readonly googleOauthConfig: IGoogleOauthConfig) {
+  constructor(@Inject('IGoogleOauthConfig') private readonly googleOauthConfig: IGoogleOauthConfig) {
     super({
       clientID: googleOauthConfig.getGoogleId(),
       clientSecret: googleOauthConfig.getGoogleSecret(),
