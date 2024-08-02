@@ -1,4 +1,4 @@
-import { configureNestJsMicroservice } from '@app/shared/apiRequestConfig/config';
+import { configureNestJsMicroservice } from '@app/shared/projectConfig/config';
 import type { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AuthModule } from './auth.module';

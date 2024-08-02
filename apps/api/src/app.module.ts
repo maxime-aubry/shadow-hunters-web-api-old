@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+import { LocalAuthController } from './localAuth.controller';
 
 @Module({
   imports: [],
-  controllers: [AppController],
+  controllers: [LocalAuthController],
 })
 export class AppModule {}
