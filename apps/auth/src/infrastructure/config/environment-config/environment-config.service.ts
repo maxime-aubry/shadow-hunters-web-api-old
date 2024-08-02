@@ -49,15 +49,15 @@ export class EnvironmentConfigService implements IDatabaseConfig, IJwtConfig, IG
   }
 
   public getDatabaseUser(): string | undefined {
-    return this.configService.get<string>('DATABASE_USER');
+    return this.configService.get<string>('POSTGRES_USER');
   }
 
   public getDatabasePassword(): string | undefined {
-    return this.configService.get<string>('DATABASE_PASSWORD');
+    return this.configService.get<string>('POSTGRES_PASSWORD');
   }
 
   public getDatabaseName(): string | undefined {
-    return this.configService.get<string>('DATABASE_NAME');
+    return this.configService.get<string>('POSTGRES_DB');
   }
 
   public getDatabaseSchema(): string | undefined {

@@ -7,7 +7,7 @@
       {
           "type": "bun",
           "request": "launch",
-          "name": "Debug Bun to Shadow Hunters Api Project",
+          "name": "Debug Bun to Shadow Hunters API Project",
           "program": "${workspaceFolder}/apps/api/src/main.ts",
           "args": [],
           "cwd": "${workspaceFolder}",
@@ -24,7 +24,7 @@
       {
           "type": "bun",
           "request": "launch",
-          "name": "Debug Bun to Shadow Hunters Auth Project",
+          "name": "Debug Bun to Shadow Hunters Auth API Project",
           "program": "${workspaceFolder}/apps/auth/src/main.ts",
           "args": [],
           "cwd": "${workspaceFolder}",
@@ -50,7 +50,7 @@
           "type": "bun",
           "internalConsoleOptions": "neverOpen",
           "request": "attach",
-          "name": "Attach Bun to Shadow Hunters Auth Project",
+          "name": "Attach Bun to Shadow Hunters Auth API Project",
           "url": "ws://localhost:6499/157qcd97lrq",
           "stopOnEntry": false
       }
