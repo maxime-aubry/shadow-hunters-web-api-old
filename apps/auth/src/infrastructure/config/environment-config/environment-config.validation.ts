@@ -39,9 +39,9 @@ class EnvironmentVariables {
     this.OAUTH_GOOGLE_EXPIRATION_TIME = oauthGoogleExpirationTime;
     this.DATABASE_HOST = databaseHost;
     this.DATABASE_PORT = databasePort;
-    this.DATABASE_USER = databaseUser;
-    this.DATABASE_PASSWORD = databasePassword;
-    this.DATABASE_NAME = databaseName;
+    this.POSTGRES_USER = databaseUser;
+    this.POSTGRES_PASSWORD = databasePassword;
+    this.POSTGRES_DB = databaseName;
     this.DATABASE_SCHEMA = databaseSchema;
     this.DATABASE_SYNCHRONIZE = databaseSynchronize;
   }
@@ -80,13 +80,13 @@ class EnvironmentVariables {
   DATABASE_PORT: number;
 
   @IsString()
-  DATABASE_USER: string;
+  POSTGRES_USER: string;
 
   @IsString()
-  DATABASE_PASSWORD: string;
+  POSTGRES_PASSWORD: string;
 
   @IsString()
-  DATABASE_NAME: string;
+  POSTGRES_DB: string;
 
   @IsString()
   DATABASE_SCHEMA: string;
