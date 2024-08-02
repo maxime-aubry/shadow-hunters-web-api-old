@@ -15,7 +15,7 @@
     // "strictNullChecks": false,
     "noImplicitAny": true,
     "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@app/shared": ["libs/shared/src"],
