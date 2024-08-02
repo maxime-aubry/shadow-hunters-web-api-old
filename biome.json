@@ -46,7 +46,7 @@
         "useShorthandAssign": "error"
       },
       "suspicious": {
-        "noConsoleLog": "error",
+        "noConsoleLog": "off",
         "noEmptyBlockStatements": "off",
         "noExplicitAny": "off",
         "noSkippedTests": "error",

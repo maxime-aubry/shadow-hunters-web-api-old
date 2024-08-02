@@ -1,7 +1,7 @@
+import { LoggerModule } from '@app/shared/logger/logger.module';
 import { Module } from '@nestjs/common';
 import { EnvironmentConfigModule } from '../../infrastructure/config/environment-config/environment-config.module';
 import { AuthRepositoriesModule } from '../../infrastructure/database/auth-repositories.module';
-import { LoggerModule } from '../../infrastructure/logger/logger.module';
 import { AuthMappersModule } from '../../infrastructure/mappers/auth-mappers.module';
 import { BcryptModule } from '../../infrastructure/services/bcrypt/bcrypt.module';
 import { JwtModule } from '../../infrastructure/services/jwt/jwt.module';

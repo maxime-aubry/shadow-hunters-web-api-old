@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "bun",
+      "request": "launch",
+      "name": "Debug NestJS Auth Service with Bun",
+      "program": "${workspaceFolder}/apps/auth/src/main.ts",
+      "env": {
+        "NODE_ENV": "local"
+      },
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "bun",
+      "request": "launch",
+      "name": "Debug NestJS API Service with Bun",
+      "program": "${workspaceFolder}/apps/api/src/main.ts",
+      "env": {
+        "NODE_ENV": "local"
+      },
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": ["--inspect=ws://localhost:6499/sd7pwbxl03l"]
+    },
+    {
+      "type": "bun",
+      "request": "attach",
+      "name": "Attach to Bun",
+      "url": "ws://localhost:6499/sd7pwbxl03l",
+      "internalConsoleOptions": "openOnSessionStart"
+    }
+  ]
+}

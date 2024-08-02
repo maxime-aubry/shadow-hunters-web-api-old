@@ -1,3 +1,4 @@
+import { SharedModule } from '@app/shared';
 import { Module } from '@nestjs/common';
 import { AuthUseCasesModule } from '../../domain/useCases/auth-usecases.module';
 import { EnvironmentConfigModule } from '../config/environment-config/environment-config.module';
@@ -9,7 +10,7 @@ import { GoogleOauthGuard } from './oauth/googleOauthGuard/google-oauth.guard';
 import { GoogleOauthStrategy } from './oauth/googleOauthGuard/google-oauth.strategy';
 
 @Module({
-  imports: [EnvironmentConfigModule, AuthUseCasesModule],
+  imports: [SharedModule, EnvironmentConfigModule, AuthUseCasesModule],
   providers: [JwtAuthGuard, JwtAuthStrategy, LocalAuthGuard, LocalAuthStrategy, GoogleOauthGuard, GoogleOauthStrategy],
   exports: [JwtAuthGuard, JwtAuthStrategy, LocalAuthGuard, LocalAuthStrategy, GoogleOauthGuard, GoogleOauthStrategy],
 })

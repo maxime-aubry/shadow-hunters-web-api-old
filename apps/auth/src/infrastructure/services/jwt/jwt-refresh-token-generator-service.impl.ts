@@ -2,8 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import type { IJwtConfig } from 'apps/auth/src/domain/adapters/config/jwt-config.interface';
 import type { IJwtRefreshTokenGenerator } from 'apps/auth/src/domain/adapters/services/jwt/jwt-refresh-token-generator.interface';
-import type { User } from 'apps/auth/src/domain/models/user.model';
-import { JwtPayload } from './jwt-payload';
+import type { JwtTokenPayload } from '../../../domain/models/jwtTokenPayload';
 import { JwtTokenService } from './jwt-token-service.impl';
 
 @Injectable()
@@ -15,8 +14,7 @@ export class JwtRefreshTokenGeneratorServiceImpl extends JwtTokenService impleme
     super(jwtService);
   }
 
-  public generateToken(user: User): string {
-    const payload: JwtPayload = new JwtPayload(user.id, user.firstname, user.lastname, user.username);
+  public generateToken(payload: JwtTokenPayload): string {
     const secret: string = this.jwtConfig.getJwtRefreshSecret();
     const expiresIn: string = `${this.jwtConfig.getJwtRefreshExpirationTime()}s`;
     const token: string = this.createToken(payload, secret, expiresIn);

@@ -1,13 +1,20 @@
 import { Controller, Get, Inject, Req, Res, UseGuards } from '@nestjs/common';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import type { IGoogleOauthConfig } from 'apps/auth/src/domain/adapters/config/google-oauth-config.interface';
-import type { OAuthUser } from 'apps/auth/src/domain/models/oauth-user.model';
+import type { User } from 'apps/auth/src/domain/models/user.model';
 import type { ICommonAuthUseCases } from 'apps/auth/src/domain/ports/in/usecases/common-auth-use-cases.interface';
 import type { IOAuthUseCases } from 'apps/auth/src/domain/ports/in/usecases/oauth-use-cases.interface';
 import { GoogleOauthGuard } from 'apps/auth/src/infrastructure/guards/oauth/googleOauthGuard/google-oauth.guard';
 import type { Request, Response } from 'express';
-import { GetOauthUser } from '../../../infrastructure/guards/oauth/get-oauth-user.decorator';
+import { GetUser } from '../../../infrastructure/guards/getUser.decorator';
 
 @Controller('google-oauth')
+@ApiTags('google-auth')
+@ApiResponse({
+  status: 401,
+  description: 'No authorization token was found',
+})
+@ApiResponse({ status: 500, description: 'Internal server error' })
 export class GoogleAuthController {
   constructor(
     @Inject('IOAuthUseCases') private readonly oauthUseCases: IOAuthUseCases,
@@ -17,17 +24,20 @@ export class GoogleAuthController {
 
   @Get('auth')
   @UseGuards(GoogleOauthGuard)
-  public async auth(): Promise<void> {}
+  public auth(): void {
+    console.log('auth');
+  }
 
   @Get('callback')
   @UseGuards(GoogleOauthGuard)
-  public async authCallback(
-    @GetOauthUser() user: OAuthUser,
-    @Req() request: Request,
-    @Res() response: Response,
-  ): Promise<void> {
+  public authCallback(@GetUser() user: User, @Req() request: Request, @Res() response: Response): void {
+    console.log('callback');
+    console.log(user);
+    console.log(request);
+    console.log(response);
     // const allocateTokensRequest: AllocateTokensUseCaseRequest = new AllocateTokensUseCaseRequest(user);
-    // const allocateTokensResponse: AllocateTokensUseCaseResponse = await this.commonAuthUseCases.allocateTokens.executeAsync(allocateTokensRequest);
+    // const allocateTokensResponse: AllocateTokensUseCaseResponse =
+    //   await this.commonAuthUseCases.allocateTokens.executeAsync(allocateTokensRequest);
     // request.res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
     // const useCaseRequest: SignInForOauthStrategyUseCaseRequest = new SignInForOauthStrategyUseCaseRequest(
     //   user.provider,

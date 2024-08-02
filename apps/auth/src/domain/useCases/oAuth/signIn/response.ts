@@ -1,9 +1,13 @@
-import type { OAuthUser } from '../../../models/oauth-user.model';
+import type { User } from '../../../models/user.model';
 
 export class SignInForOauthStrategyUseCaseResponse {
-  constructor(user: OAuthUser) {
+  constructor(user: User, accessTokenCookie: string, refreshTokenCookie: string) {
     this.user = user;
+    this.accessTokenCookie = accessTokenCookie;
+    this.refreshTokenCookie = refreshTokenCookie;
   }
 
-  public user: OAuthUser;
+  public user: User;
+  public accessTokenCookie: string;
+  public refreshTokenCookie: string;
 }

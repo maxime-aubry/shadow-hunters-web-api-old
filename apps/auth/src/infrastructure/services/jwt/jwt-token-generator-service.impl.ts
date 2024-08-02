@@ -2,21 +2,19 @@ import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import type { IJwtConfig } from 'apps/auth/src/domain/adapters/config/jwt-config.interface';
 import type { IJwtTokenGenerator } from 'apps/auth/src/domain/adapters/services/jwt/jwt-token-generator.interface';
-import type { User } from 'apps/auth/src/domain/models/user.model';
-import { JwtPayload } from './jwt-payload';
+import type { JwtTokenPayload } from '../../../domain/models/jwtTokenPayload';
 import { JwtTokenService } from './jwt-token-service.impl';
 
 @Injectable()
 export class JwtTokenGeneratorServiceImpl extends JwtTokenService implements IJwtTokenGenerator {
   constructor(
-    @Inject(JwtService) protected readonly jwtService: JwtService,
+    protected readonly jwtService: JwtService,
     @Inject('IJwtConfig') private readonly jwtConfig: IJwtConfig,
   ) {
     super(jwtService);
   }
 
-  public generateToken(user: User): string {
-    const payload: JwtPayload = new JwtPayload(user.id, user.firstname, user.lastname, user.username);
+  public generateToken(payload: JwtTokenPayload): string {
     const secret: string = this.jwtConfig.getJwtSecret();
     const expirationTime: string = `${this.jwtConfig.getJwtExpirationTime()}s`;
     const token: string = this.createToken(payload, secret, expirationTime);

@@ -16,6 +16,7 @@ const ignoreEnvFile = (): boolean => {
       isGlobal: true,
       validate,
     }),
+    EnvironmentConfigModule,
   ],
   providers: [
     {

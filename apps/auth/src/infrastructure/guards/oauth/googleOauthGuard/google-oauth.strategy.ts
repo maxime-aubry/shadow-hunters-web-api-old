@@ -1,13 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import type { IGoogleOauthConfig } from 'apps/auth/src/domain/adapters/config/google-oauth-config.interface';
-import type { OAuthUser } from 'apps/auth/src/domain/models/oauth-user.model';
+import type { User } from 'apps/auth/src/domain/models/user.model';
 import type { IOAuthUseCases } from 'apps/auth/src/domain/ports/in/usecases/oauth-use-cases.interface';
-import { SignInForOauthStrategyUseCaseRequest } from 'apps/auth/src/domain/useCases/oauth/signIn/request';
-import type { SignInForOauthStrategyUseCaseResponse } from 'apps/auth/src/domain/useCases/oauth/signIn/response';
+import { ValidateUserForOauthStrategyUseCaseRequest } from 'apps/auth/src/domain/useCases/oauth/validateUser/request';
+import type { ValidateUserForOauthStrategyUseCaseResponse } from 'apps/auth/src/domain/useCases/oauth/validateUser/response';
 import { type Profile, Strategy } from 'passport-google-oauth20';
 import type { OauthAccountEmail } from '../oauth-account-email';
-import type { OauthAccountOwner } from '../oauth-account-owner';
 import { OauthProfileService } from '../oauth-profile.service';
 
 @Injectable()
@@ -24,20 +23,19 @@ export class GoogleOauthStrategy extends PassportStrategy(Strategy, 'google') {
     });
   }
 
-  public async validate(profile: Profile): Promise<OAuthUser> {
-    const { provider, id, name, emails, displayName } = profile;
-    const accountOwner: OauthAccountOwner = name as OauthAccountOwner;
+  public async validate(accessToken: string, refreshToken: string, profile: Profile, cb: any): Promise<User> {
+    console.log(accessToken, refreshToken, profile, cb);
+    const { provider, id, emails } = profile;
     const accountEmails: OauthAccountEmail[] = emails as OauthAccountEmail[];
-    const signInRequest: SignInForOauthStrategyUseCaseRequest = new SignInForOauthStrategyUseCaseRequest(
+    const signInRequest: ValidateUserForOauthStrategyUseCaseRequest = new ValidateUserForOauthStrategyUseCaseRequest(
+      OauthProfileService.getVerifiedEmail(accountEmails),
       provider,
       id,
-      OauthProfileService.getFirstname(accountOwner),
-      OauthProfileService.getLastname(accountOwner),
-      displayName,
-      OauthProfileService.getVerifiedEmail(accountEmails),
     );
-    const signInResponse: SignInForOauthStrategyUseCaseResponse =
-      await this.oauthUseCases.signIn.executeAsync(signInRequest);
+    const signInResponse: ValidateUserForOauthStrategyUseCaseResponse =
+      await this.oauthUseCases.validateUser.executeAsync(signInRequest);
+
+    if (signInResponse.user) return signInResponse.user;
     return signInResponse.user;
   }
 }

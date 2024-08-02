@@ -1,14 +1,14 @@
-import { Body, Controller, Inject, Post, Req, Res, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiExtraModels, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import type { LocalAuthUseCasesImpl } from 'apps/auth/src/domain/useCases/localAuth/local-auth-usecases';
-import { SignInForLocalStrategyUseCaseRequest } from 'apps/auth/src/domain/useCases/localAuth/sign-in/request';
-import type { SignInForLocalStrategyUseCaseResponse } from 'apps/auth/src/domain/useCases/localAuth/sign-in/response';
-import { SignUpForLocalStrategyUseCaseRequest } from 'apps/auth/src/domain/useCases/localAuth/sign-up/request';
-import type { SignUpForLocalStrategyUseCaseResponse } from 'apps/auth/src/domain/useCases/localAuth/sign-up/response';
+import { Body, Controller, Inject, Post, Req, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import type { ILocalAuthUseCases } from 'apps/auth/src/domain/ports/in/usecases/local-auth-use-cases.interface';
+import { SignInForLocalStrategyUseCaseRequest } from 'apps/auth/src/domain/useCases/localAuth/signIn/request';
+import type { SignInForLocalStrategyUseCaseResponse } from 'apps/auth/src/domain/useCases/localAuth/signIn/response';
+import { SignUpForLocalStrategyUseCaseRequest } from 'apps/auth/src/domain/useCases/localAuth/signUp/request';
+import type { SignUpForLocalStrategyUseCaseResponse } from 'apps/auth/src/domain/useCases/localAuth/signUp/response';
 import { LocalAuthGuard } from 'apps/auth/src/infrastructure/guards/localAuthGuard/local-auth.guard';
+import type { Request } from 'express';
 import { LocalAuthSignInDto } from './dtos/local-auth-sign-in.dto';
 import { LocalAuthSignUpDto } from './dtos/local-auth-sign-up.dto';
-import { Request, Response } from 'express';
 
 @Controller('local-auth')
 @ApiTags('local-auth')
@@ -18,7 +18,7 @@ import { Request, Response } from 'express';
 })
 @ApiResponse({ status: 500, description: 'Internal server error' })
 export class LocalAuthController {
-  constructor(@Inject('ILocalAuthUseCases') private readonly localAuthUseCasesCollection: LocalAuthUseCasesImpl) {}
+  constructor(@Inject('ILocalAuthUseCases') private readonly localAuthUseCasesCollection: ILocalAuthUseCases) {}
 
   @Post('signup')
   @UseGuards(LocalAuthGuard)
@@ -36,7 +36,6 @@ export class LocalAuthController {
     const signUpResponse: SignUpForLocalStrategyUseCaseResponse =
       await this.localAuthUseCasesCollection.signUp.executeAsync(signUpRequest);
 
-    
     return signUpResponse;
   }
 
@@ -44,7 +43,10 @@ export class LocalAuthController {
   @UseGuards(LocalAuthGuard)
   @ApiBearerAuth()
   @ApiBody({ type: LocalAuthSignInDto })
-  public async signIn(@Body() auth: LocalAuthSignInDto, @Req() request: Request): Promise<SignInForLocalStrategyUseCaseResponse> {
+  public async signIn(
+    @Body() auth: LocalAuthSignInDto,
+    @Req() request: Request,
+  ): Promise<SignInForLocalStrategyUseCaseResponse> {
     const signInRequest: SignInForLocalStrategyUseCaseRequest = new SignInForLocalStrategyUseCaseRequest(
       auth.usernameOrEmail,
       auth.password,

@@ -1,6 +1,6 @@
-import type { User } from '../../../models/user.model';
+import type { JwtTokenPayload } from '../../../models/jwtTokenPayload';
 
 export interface IJwtTokenGenerator {
-  generateToken(user: User): string;
+  generateToken(payload: JwtTokenPayload): string;
   generateCookieWithToken(token: string): string;
 }
