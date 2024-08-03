@@ -16,7 +16,7 @@
       "stopOnEntry": false,
       "noDebug": false,
       "runtime": "bun",
-      "runtimeArgs": ["--inspect=ws://localhost:6499/j6n9zupm9eh"]
+      "runtimeArgs": ["--inspect=ws://localhost:6499/g22qrulsbm5"]
     },
     {
       "type": "bun",
@@ -33,14 +33,14 @@
       "stopOnEntry": false,
       "noDebug": false,
       "runtime": "bun",
-      "runtimeArgs": ["--inspect=ws://localhost:6499/157qcd97lrq"]
+      "runtimeArgs": ["--inspect=ws://localhost:6499/zd0iinb4l6"]
     },
     {
       "type": "bun",
       "internalConsoleOptions": "neverOpen",
       "request": "attach",
       "name": "Attach Bun to Shadow Hunters API Project",
-      "url": "ws://localhost:6499/j6n9zupm9eh",
+      "url": "ws://localhost:6499/g22qrulsbm5",
       "stopOnEntry": false
     },
     {
@@ -48,7 +48,7 @@
       "internalConsoleOptions": "neverOpen",
       "request": "attach",
       "name": "Attach Bun to Shadow Hunters Auth API Project",
-      "url": "ws://localhost:6499/157qcd97lrq",
+      "url": "ws://localhost:6499/zd0iinb4l6",
       "stopOnEntry": false
     }
   ]
