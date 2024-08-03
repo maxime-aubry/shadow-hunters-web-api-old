@@ -7,8 +7,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "start:dev": "bun start:dev:auth && bun start:dev:api",
-    "start:dev:api": "NODE_ENV=local bun --watch ./apps/api/src/main.ts",
-    "start:dev:auth": "NODE_ENV=local bun --watch ./apps/auth/src/main.ts",
+    "start:dev:api": "NODE_ENV=local bun --bun --watch ./apps/api/src/main.ts",
+    "start:dev:auth": "NODE_ENV=local bun --bun --watch ./apps/auth/src/main.ts",
     "start:prod": "bun ./apps/api/src/main.ts",
     "lint": "biome check .",
     "lint:fix": "biome check --apply ."

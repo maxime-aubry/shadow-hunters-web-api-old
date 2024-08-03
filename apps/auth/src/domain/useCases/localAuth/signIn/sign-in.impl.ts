@@ -2,7 +2,7 @@ import { UserEntity } from '@app/shared';
 import { UnauthorizedException } from '@nestjs/common';
 import type { LocalCredentials } from 'apps/auth/src/infrastructure/database/entities/user.entity';
 import type { IAuthMappersService } from 'apps/auth/src/infrastructure/mappers/auth-mappers-service.interface';
-import type { IBcryptService } from '../../../adapters/services/bcrypt/bcrypt.interface';
+import type { IHashService } from '../../../adapters/services/hash/hash.interface';
 import type { IJwtRefreshTokenGenerator } from '../../../adapters/services/jwt/jwt-refresh-token-generator.interface';
 import type { IJwtTokenGenerator } from '../../../adapters/services/jwt/jwt-token-generator.interface';
 import { User } from '../../../models/user.model';
@@ -14,7 +14,7 @@ import type { ISignInForLocalStrategyUseCase } from './sign-in.interface';
 export class SignInForLocalStrategyUseCaseImpl implements ISignInForLocalStrategyUseCase {
   constructor(
     private readonly authMappersService: IAuthMappersService,
-    private readonly bcryptService: IBcryptService,
+    private readonly hashService: IHashService,
     private readonly jwtTokenGenerator: IJwtTokenGenerator,
     private readonly jwtRefreshTokenGenerator: IJwtRefreshTokenGenerator,
     private readonly userRepository: IUsersRepository,
@@ -42,7 +42,7 @@ export class SignInForLocalStrategyUseCaseImpl implements ISignInForLocalStrateg
 
   private async checkCredentials(existingUser: UserEntity, clearedPassword: string): Promise<void> {
     const credentials: LocalCredentials = existingUser.credentials as LocalCredentials;
-    const doesPasswordMatch: boolean = await this.bcryptService.compareAsync(clearedPassword, credentials.password);
+    const doesPasswordMatch: boolean = await this.hashService.compareAsync(clearedPassword, credentials.password);
 
     if (!doesPasswordMatch) throw new UnauthorizedException('Password does not match!');
   }
@@ -66,7 +66,7 @@ export class SignInForLocalStrategyUseCaseImpl implements ISignInForLocalStrateg
   }
 
   private async updateUser(existingUser: UserEntity, refreshToken: string): Promise<void> {
-    const hashedRefreshToken: string = await this.bcryptService.hashAsync(refreshToken);
+    const hashedRefreshToken: string = await this.hashService.hashAsync(refreshToken);
     await this.userRepository.updateRefreshTokenAsync(existingUser, hashedRefreshToken);
   }
 }

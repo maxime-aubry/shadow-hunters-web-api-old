@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import type { JwtService } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
 import type { IJwtConfig } from 'apps/auth/src/domain/adapters/config/jwt-config.interface';
 import type { IJwtTokenGenerator } from 'apps/auth/src/domain/adapters/services/jwt/jwt-token-generator.interface';
 import type { JwtTokenPayload } from '../../../domain/models/jwtTokenPayload';
@@ -8,7 +8,7 @@ import { JwtTokenService } from './jwt-token-service.impl';
 @Injectable()
 export class JwtTokenGeneratorServiceImpl extends JwtTokenService implements IJwtTokenGenerator {
   constructor(
-    protected readonly jwtService: JwtService,
+    @Inject(JwtService) protected readonly jwtService: JwtService,
     @Inject('IJwtConfig') private readonly jwtConfig: IJwtConfig,
   ) {
     super(jwtService);

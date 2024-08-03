@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import type { IAuthMappersService } from 'apps/auth/src/infrastructure/mappers/auth-mappers-service.interface';
-import type { IBcryptService } from '../../adapters/services/bcrypt/bcrypt.interface';
+import type { IHashService } from '../../adapters/services/hash/hash.interface';
 import type { IJwtRefreshTokenGenerator } from '../../adapters/services/jwt/jwt-refresh-token-generator.interface';
 import type { IJwtTokenGenerator } from '../../adapters/services/jwt/jwt-token-generator.interface';
 import type { ILocalAuthUseCases } from '../../ports/in/usecases/local-auth-use-cases.interface';
@@ -20,19 +20,19 @@ export class LocalAuthUseCasesImpl implements ILocalAuthUseCases {
 
   constructor(
     @Inject('IAuthMappersService') private readonly authMappersService: IAuthMappersService,
-    @Inject('IBcryptService') private readonly bcryptService: IBcryptService,
+    @Inject('IHashService') private readonly hashService: IHashService,
     @Inject('IJwtTokenGenerator') private readonly jwtTokenGenerator: IJwtTokenGenerator,
     @Inject('IJwtRefreshTokenGenerator') private readonly jwtRefreshTokenGenerator: IJwtRefreshTokenGenerator,
     @Inject('IUsersRepository') private readonly userRepository: IUsersRepository,
   ) {
-    this.signUp = new SignUpForLocalStrategyUseCaseImpl(authMappersService, bcryptService, userRepository);
+    this.signUp = new SignUpForLocalStrategyUseCaseImpl(authMappersService, hashService, userRepository);
     this.signIn = new SignInForLocalStrategyUseCaseImpl(
       authMappersService,
-      bcryptService,
+      hashService,
       jwtTokenGenerator,
       jwtRefreshTokenGenerator,
       userRepository,
     );
-    this.validateUser = new ValidateUserForLocalStrategyUseCase(authMappersService, bcryptService, userRepository);
+    this.validateUser = new ValidateUserForLocalStrategyUseCase(authMappersService, hashService, userRepository);
   }
 }

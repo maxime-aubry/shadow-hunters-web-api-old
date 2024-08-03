@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import type { IAuthMappersService } from 'apps/auth/src/infrastructure/mappers/auth-mappers-service.interface';
-import type { IBcryptService } from '../../adapters/services/bcrypt/bcrypt.interface';
+import type { IHashService } from '../../adapters/services/hash/hash.interface';
 import type { IJwtRefreshTokenGenerator } from '../../adapters/services/jwt/jwt-refresh-token-generator.interface';
 import type { IJwtTokenGenerator } from '../../adapters/services/jwt/jwt-token-generator.interface';
 import type { IOAuthUseCases } from '../../ports/in/usecases/oauth-use-cases.interface';
@@ -17,21 +17,21 @@ export class OAuthUseCasesImpl implements IOAuthUseCases {
 
   constructor(
     @Inject('IAuthMappersService') private readonly authMappersService: IAuthMappersService,
-    @Inject('IBcryptService') private readonly bcryptService: IBcryptService,
+    @Inject('IHashService') private readonly hashService: IHashService,
     @Inject('IJwtTokenGenerator') private readonly jwtTokenGenerator: IJwtTokenGenerator,
     @Inject('IJwtRefreshTokenGenerator') private readonly jwtRefreshTokenGenerator: IJwtRefreshTokenGenerator,
     @Inject('IUsersRepository') private readonly userRepository: IUsersRepository,
   ) {
     this.signIn = new SignInForOauthStrategyUseCaseImpl(
       authMappersService,
-      bcryptService,
+      hashService,
       jwtTokenGenerator,
       jwtRefreshTokenGenerator,
       userRepository,
     );
     this.validateUser = new ValidateUserForOauthStrategyUseCase(
       this.authMappersService,
-      this.bcryptService,
+      this.hashService,
       this.userRepository,
     );
   }
