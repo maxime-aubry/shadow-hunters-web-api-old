@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import type { JwtService } from '@nestjs/jwt';
 import type { IJwtConfig } from 'apps/auth/src/domain/adapters/config/jwt-config.interface';
 import type { IJwtTokenGenerator } from 'apps/auth/src/domain/adapters/services/jwt/jwt-token-generator.interface';
 import type { JwtTokenPayload } from '../../../domain/models/jwtTokenPayload';
