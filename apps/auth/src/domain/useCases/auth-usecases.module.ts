@@ -1,6 +1,6 @@
+import { EnvironmentConfigModule } from '@app/shared';
 import { LoggerModule } from '@app/shared/logger/logger.module';
 import { Module } from '@nestjs/common';
-import { EnvironmentConfigModule } from '../../infrastructure/config/environment-config/environment-config.module';
 import { AuthRepositoriesModule } from '../../infrastructure/database/auth-repositories.module';
 import { AuthMappersModule } from '../../infrastructure/mappers/auth-mappers.module';
 import { HashModule } from '../../infrastructure/services/hash/hash.module';

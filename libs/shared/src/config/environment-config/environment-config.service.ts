@@ -3,10 +3,23 @@ import { ConfigService } from '@nestjs/config';
 import type { IDatabaseConfig } from 'apps/auth/src/domain/adapters/config/database-config.interface';
 import type { IGoogleOauthConfig } from 'apps/auth/src/domain/adapters/config/google-oauth-config.interface';
 import type { IJwtConfig } from 'apps/auth/src/domain/adapters/config/jwt-config.interface';
+import type { IRabbitMQConfig } from 'apps/auth/src/domain/adapters/config/rabbitMq-config.interface';
 
 @Injectable()
-export class EnvironmentConfigService implements IDatabaseConfig, IJwtConfig, IGoogleOauthConfig {
+export class EnvironmentConfigService implements IRabbitMQConfig, IDatabaseConfig, IJwtConfig, IGoogleOauthConfig {
   constructor(@Inject(ConfigService) private readonly configService: ConfigService) {}
+
+  public getRabbitMqUser(): string {
+    return this.configService.get<string>('RABBITMQ_USER') ?? '';
+  }
+
+  public getRabbitMqPass(): string {
+    return this.configService.get<string>('RABBITMQ_PASS') ?? '';
+  }
+
+  public getRabbitMqHost(): string {
+    return this.configService.get<string>('RABBITMQ_HOST') ?? '';
+  }
 
   public getJwtSecret(): string {
     return this.configService.get<string>('JWT_SECRET') ?? '';

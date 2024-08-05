@@ -1,7 +1,6 @@
-import { SharedModule } from '@app/shared';
+import { EnvironmentConfigModule, SharedModule } from '@app/shared';
 import { Module } from '@nestjs/common';
 import { AuthUseCasesModule } from '../../domain/useCases/auth-usecases.module';
-import { EnvironmentConfigModule } from '../config/environment-config/environment-config.module';
 import { JwtAuthGuard } from './jwtAuthGuard/jwt-auth.guard';
 import { JwtAuthStrategy } from './jwtAuthGuard/jwt-auth.strategy';
 import { LocalAuthGuard } from './localAuthGuard/local-auth.guard';

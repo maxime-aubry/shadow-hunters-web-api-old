@@ -12,6 +12,9 @@ enum Environment {
 class EnvironmentVariables {
   constructor(
     nodeEnv: Environment,
+    rabbitMqUser: string,
+    rabbitMqPass: string,
+    rabbitMqHost: string,
     jwtSecret: string,
     jwtExpirationTime: string,
     jwtRefreshTokenSecret: string,
@@ -29,6 +32,9 @@ class EnvironmentVariables {
     databaseSynchronize: boolean,
   ) {
     this.NODE_ENV = nodeEnv;
+    this.RABBITMQ_USER = rabbitMqUser;
+    this.RABBITMQ_PASS = rabbitMqPass;
+    this.RABBITMQ_HOST = rabbitMqHost;
     this.JWT_SECRET = jwtSecret;
     this.JWT_EXPIRATION_TIME = jwtExpirationTime;
     this.JWT_REFRESH_TOKEN_SECRET = jwtRefreshTokenSecret;
@@ -48,6 +54,15 @@ class EnvironmentVariables {
 
   @IsEnum(Environment)
   NODE_ENV: Environment;
+
+  @IsString()
+  RABBITMQ_USER: string;
+
+  @IsString()
+  RABBITMQ_PASS: string;
+
+  @IsString()
+  RABBITMQ_HOST: string;
 
   @IsString()
   JWT_SECRET: string;

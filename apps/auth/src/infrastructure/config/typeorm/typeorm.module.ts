@@ -1,7 +1,7 @@
+import { EnvironmentConfigModule } from '@app/shared';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule, type TypeOrmModuleOptions } from '@nestjs/typeorm';
 import type { IDatabaseConfig } from 'apps/auth/src/domain/adapters/config/database-config.interface';
-import { EnvironmentConfigModule } from '../environment-config/environment-config.module';
 
 export const getTypeOrmModuleOptions = (config: IDatabaseConfig): TypeOrmModuleOptions =>
   ({
