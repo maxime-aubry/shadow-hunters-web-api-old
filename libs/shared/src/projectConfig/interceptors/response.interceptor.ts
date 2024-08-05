@@ -31,7 +31,7 @@ export class ResponseFormat<TContent> {
 
 @Injectable()
 export class ResponseInterceptor<T> implements NestInterceptor<T, ResponseFormat<T>> {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<ResponseFormat<T>> {
+  public intercept(context: ExecutionContext, next: CallHandler): Observable<ResponseFormat<T>> {
     const start: number = Date.now();
     const httpContext: HttpArgumentsHost = context.switchToHttp();
     const request: Request = httpContext.getRequest<Request>();

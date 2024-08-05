@@ -1,4 +1,4 @@
-import type { ILoggerService } from '@app/shared/logger/logger-service.interface';
+import type { ILoggerService } from '@app/shared/logger/logger.interface';
 import { Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import type { IJwtConfig } from 'apps/auth/src/domain/adapters/config/jwt-config.interface';

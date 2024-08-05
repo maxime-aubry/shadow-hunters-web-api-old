@@ -1,4 +1,4 @@
-import type { ILoggerService } from '@app/shared/logger/logger-service.interface';
+import type { ILoggerService } from '@app/shared/logger/logger.interface';
 import { type ArgumentsHost, Catch, type ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
 import type { HttpArgumentsHost } from '@nestjs/common/interfaces';
 import type { Request, Response } from 'express';
@@ -25,7 +25,8 @@ class GlobalException implements IError {
 @Catch()
 export class AllExceptionFilter implements ExceptionFilter {
   constructor(private readonly logger: ILoggerService) {}
-  catch(exception: any, host: ArgumentsHost) {
+
+  public catch(exception: any, host: ArgumentsHost) {
     const context: HttpArgumentsHost = host.switchToHttp();
     const response: Response = context.getResponse();
     const request: Request = context.getRequest();

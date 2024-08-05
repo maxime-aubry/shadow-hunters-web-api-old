@@ -1,13 +1,13 @@
+import type { ILoggerService } from '@app/shared/logger/logger.interface';
 import { type CallHandler, type ExecutionContext, Injectable, type NestInterceptor } from '@nestjs/common';
 import type { HttpArgumentsHost } from '@nestjs/common/interfaces';
-import type { LoggerService } from 'apps/auth/src/infrastructure/logger/logger.service';
 import type { Request } from 'express';
 import type { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
-  constructor(private readonly logger: LoggerService) {}
+  constructor(private readonly logger: ILoggerService) {}
 
   public intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const now: number = Date.now();

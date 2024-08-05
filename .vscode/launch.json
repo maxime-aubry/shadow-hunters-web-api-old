@@ -16,7 +16,7 @@
       "stopOnEntry": false,
       "noDebug": false,
       "runtime": "bun",
-      "runtimeArgs": ["--inspect=ws://localhost:6499/g22qrulsbm5"]
+      "runtimeArgs": ["--inspect=ws://localhost:6498/g22qrulsbm5"]
     },
     {
       "type": "bun",
@@ -40,7 +40,7 @@
       "internalConsoleOptions": "neverOpen",
       "request": "attach",
       "name": "Attach Bun to Shadow Hunters API Project",
-      "url": "ws://localhost:6499/g22qrulsbm5",
+      "url": "ws://localhost:6498/g22qrulsbm5",
       "stopOnEntry": false
     },
     {
