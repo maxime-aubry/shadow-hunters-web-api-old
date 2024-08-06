@@ -15,6 +15,7 @@ class EnvironmentVariables {
     rabbitMqUser: string,
     rabbitMqPass: string,
     rabbitMqHost: string,
+    rabbitMqAuthQueue: string,
     jwtSecret: string,
     jwtExpirationTime: string,
     jwtRefreshTokenSecret: string,
@@ -35,6 +36,7 @@ class EnvironmentVariables {
     this.RABBITMQ_USER = rabbitMqUser;
     this.RABBITMQ_PASS = rabbitMqPass;
     this.RABBITMQ_HOST = rabbitMqHost;
+    this.RABBITMQ_AUTH_QUEUE = rabbitMqAuthQueue;
     this.JWT_SECRET = jwtSecret;
     this.JWT_EXPIRATION_TIME = jwtExpirationTime;
     this.JWT_REFRESH_TOKEN_SECRET = jwtRefreshTokenSecret;
@@ -63,6 +65,9 @@ class EnvironmentVariables {
 
   @IsString()
   RABBITMQ_HOST: string;
+
+  @IsString()
+  RABBITMQ_AUTH_QUEUE: string;
 
   @IsString()
   JWT_SECRET: string;

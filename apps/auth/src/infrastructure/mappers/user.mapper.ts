@@ -1,9 +1,9 @@
 import { UserEntity } from '@app/shared';
 import { type Mapper, type MappingProfile, createMap } from '@automapper/core';
-import { User } from '../../domain/models/user.model';
+import { LocalUserModel } from '../../domain/models/localUser.model';
 
 const registerUserProfile: MappingProfile = (mapper: Mapper) => {
-  createMap(mapper, UserEntity, User);
+  createMap(mapper, UserEntity, LocalUserModel);
   // createMap(
   //   mapper,
   //   UserEntity,

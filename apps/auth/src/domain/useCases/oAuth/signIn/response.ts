@@ -1,13 +1,13 @@
-import type { User } from '../../../models/user.model';
+import type { LocalUserModel } from '../../../models/localUser.model';
 
 export class SignInForOauthStrategyUseCaseResponse {
-  constructor(user: User, accessTokenCookie: string, refreshTokenCookie: string) {
+  constructor(user: LocalUserModel, accessTokenCookie: string, refreshTokenCookie: string) {
     this.user = user;
     this.accessTokenCookie = accessTokenCookie;
     this.refreshTokenCookie = refreshTokenCookie;
   }
 
-  public user: User;
+  public user: LocalUserModel;
   public accessTokenCookie: string;
   public refreshTokenCookie: string;
 }

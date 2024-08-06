@@ -1,4 +1,4 @@
-import type { ILoggerService } from '@app/shared/logger/logger.interface';
+import type { ILoggerService } from '@app/shared/interfaces/services/logger/logger.interface';
 import { type ArgumentsHost, Catch, type ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
 import type { HttpArgumentsHost } from '@nestjs/common/interfaces';
 import type { Request, Response } from 'express';

@@ -1,6 +1,6 @@
 import { AutoMap } from '@automapper/classes';
 import { Column, CreateDateColumn, Entity, UpdateDateColumn } from 'typeorm';
-import { DbEntity } from '../../../../../../libs/shared/src/entities/db-entity';
+import { DbEntity } from '../../../../../../libs/shared/src/database/entities/db-entity';
 
 @Entity('user')
 export class UserEntity extends DbEntity {

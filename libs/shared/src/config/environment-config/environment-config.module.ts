@@ -20,7 +20,7 @@ const ignoreEnvFile = (): boolean => {
   ],
   providers: [
     {
-      provide: 'IRabbitMQConfig',
+      provide: 'IMessageQueueConfig',
       useClass: EnvironmentConfigService,
     },
     {
@@ -40,6 +40,6 @@ const ignoreEnvFile = (): boolean => {
       useClass: EnvironmentConfigService,
     },
   ],
-  exports: ['IRabbitMQConfig', 'IDatabaseConfig', 'IJwtConfig', 'IGoogleOauthConfig', 'IFacebookOauthConfig'],
+  exports: ['IMessageQueueConfig', 'IDatabaseConfig', 'IJwtConfig', 'IGoogleOauthConfig', 'IFacebookOauthConfig'],
 })
 export class EnvironmentConfigModule {}

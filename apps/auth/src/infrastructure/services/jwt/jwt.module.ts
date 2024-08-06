@@ -1,8 +1,8 @@
 import { EnvironmentConfigModule } from '@app/shared';
 import { Module } from '@nestjs/common';
 import { JwtModule as Jwt } from '@nestjs/jwt';
-import { JwtRefreshTokenGeneratorServiceImpl } from './jwt-refresh-token-generator-service.impl';
-import { JwtTokenGeneratorServiceImpl } from './jwt-token-generator-service.impl';
+import { JwtRefreshTokenGeneratorServiceImpl } from './jwt-refresh-token-generator.service.impl';
+import { JwtTokenGeneratorServiceImpl } from './jwt-token-generator.service.impl';
 
 @Module({
   imports: [

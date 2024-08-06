@@ -1,6 +1,6 @@
+import type { IJwtConfig } from '@app/shared/config/environment-config/jwtConfig.interface';
 import { Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import type { IJwtConfig } from 'apps/auth/src/domain/adapters/config/jwt-config.interface';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import type { JwtAuthPayload } from './jwt-auth.payload';
 
