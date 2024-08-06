@@ -1,6 +1,7 @@
 import { UserEntity } from '@app/shared';
 import type { LocalAuthValidateUserDto } from 'apps/auth/src/application/dtos/localAuth/localAuthValidateUser.dto';
-import { LocalAuthValidatedUserDto } from 'apps/auth/src/application/dtos/localAuth/localAuthValidatedUser.dto';
+import type { LocalAuthValidatedUserDto } from 'apps/auth/src/application/dtos/localAuth/localAuthValidatedUser.dto';
+import type { ILocalAuthPresenters } from 'apps/auth/src/application/presenters/localAuth/localAuthPresenters.interface';
 import type { IAuthMappersService } from 'apps/auth/src/infrastructure/mappers/authMappers.service.interface';
 import type { IHashService } from 'apps/auth/src/infrastructure/services/hash/hash.interface';
 import type { IUsersRepository } from '../../../../infrastructure/database/repositories/user-repository.interface';
@@ -12,6 +13,7 @@ export class ValidateUserForLocalStrategyUseCase implements IValidateUserForLoca
     private readonly authMappersService: IAuthMappersService,
     private readonly hashService: IHashService,
     private readonly userRepository: IUsersRepository,
+    private readonly localAuthPresenters: ILocalAuthPresenters,
   ) {}
 
   public async executeAsync(request: LocalAuthValidateUserDto): Promise<LocalAuthValidatedUserDto | null> {
@@ -30,12 +32,7 @@ export class ValidateUserForLocalStrategyUseCase implements IValidateUserForLoca
 
     if (!doesPasswordMatch) return null;
 
-    const validatedUserDto: LocalAuthValidatedUserDto = this.authMappersService.mapper.map(
-      existingUserModel,
-      LocalUserModel,
-      LocalAuthValidatedUserDto,
-    );
-    return validatedUserDto;
+    return this.localAuthPresenters.validateUserPresenter.getOutput(existingUserModel);
   }
 
   private async checkCredentials(existingUser: LocalUserModel, clearedPassword: string): Promise<boolean> {

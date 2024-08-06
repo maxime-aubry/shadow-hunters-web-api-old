@@ -1,7 +1,7 @@
 import { LocalUserModel } from 'apps/auth/src/domain/models/localUser.model';
 import type { IAuthMappersService } from 'apps/auth/src/infrastructure/mappers/authMappers.service.interface';
 import { LocalAuthSignedInUserDto } from '../../../dtos/localAuth/localAuthSignedInUser.dto';
-import type { ILocalAuthSignInPresenter } from './localAuthSignIn.presenter.interface';
+import type { ILocalAuthSignInPresenter } from './signIn.presenter.interface';
 
 export class LocalAuthSignInPresenter implements ILocalAuthSignInPresenter {
   constructor(private readonly authMappersService: IAuthMappersService) {}

@@ -27,7 +27,12 @@ export class LocalAuthUseCasesImpl implements ILocalAuthUseCases {
     @Inject('IUsersRepository') private readonly userRepository: IUsersRepository,
     @Inject('ILocalAuthPresenters') private readonly localAuthPresenters: ILocalAuthPresenters,
   ) {
-    this.signUp = new SignUpForLocalStrategyUseCaseImpl(authMappersService, hashService, userRepository);
+    this.signUp = new SignUpForLocalStrategyUseCaseImpl(
+      authMappersService,
+      hashService,
+      userRepository,
+      localAuthPresenters,
+    );
     this.signIn = new SignInForLocalStrategyUseCaseImpl(
       authMappersService,
       hashService,
@@ -36,6 +41,11 @@ export class LocalAuthUseCasesImpl implements ILocalAuthUseCases {
       userRepository,
       localAuthPresenters,
     );
-    this.validateUser = new ValidateUserForLocalStrategyUseCase(authMappersService, hashService, userRepository);
+    this.validateUser = new ValidateUserForLocalStrategyUseCase(
+      authMappersService,
+      hashService,
+      userRepository,
+      localAuthPresenters,
+    );
   }
 }
