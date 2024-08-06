@@ -2,10 +2,9 @@ import type { IMessageQueueTarget } from '@app/shared/interfaces/services/messag
 import { Body, Controller, Inject, Post, Req, UseGuards } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { LocalAuthSignedInUserDto } from 'apps/auth/src/application/dtos/localAuth/localAuthSignedInUser.dto';
 import type { LocalAuthSignedUpUserDto } from 'apps/auth/src/application/dtos/localAuth/localAuthSignedUpUser.dto';
-import type { ILocalAuthUseCases } from 'apps/auth/src/domain/useCases/localAuth/local-auth-use-cases.interface';
-import { SignInForLocalStrategyUseCaseRequest } from 'apps/auth/src/domain/useCases/localAuth/signIn/request';
-import type { SignInForLocalStrategyUseCaseResponse } from 'apps/auth/src/domain/useCases/localAuth/signIn/response';
+import { ILocalAuthUseCases } from 'apps/auth/src/domain/useCases/localAuth/localAuthUseCases.interface';
 import { LocalAuthGuard } from 'apps/auth/src/infrastructure/guards/localAuthGuard/local-auth.guard';
 import type { Request } from 'express';
 import { LocalAuthSignInUserDto } from '../../../application/dtos/localAuth/localAuthSignInUser.dto';
@@ -36,15 +35,11 @@ export class LocalAuthController {
   @ApiBearerAuth()
   @ApiBody({ type: LocalAuthSignInUserDto })
   public async signIn(
-    @Body() auth: LocalAuthSignInUserDto,
+    @Body() user: LocalAuthSignInUserDto,
     @Req() request: Request,
-  ): Promise<SignInForLocalStrategyUseCaseResponse> {
-    const signInRequest: SignInForLocalStrategyUseCaseRequest = new SignInForLocalStrategyUseCaseRequest(
-      auth.usernameOrEmail,
-      auth.password,
-    );
-    const signInResponse: SignInForLocalStrategyUseCaseResponse =
-      await this.localAuthUseCases.signIn.executeAsync(signInRequest);
+  ): Promise<LocalAuthSignedInUserDto> {
+    const signInResponse:LocalAuthSignedInUserDto =
+      await this.localAuthUseCases.signIn.executeAsync(user);
 
     request.res?.setHeader('Set-Cookie', [signInResponse.accessTokenCookie, signInResponse.refreshTokenCookie]);
 
