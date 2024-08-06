@@ -4,22 +4,29 @@ import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { EnvironmentConfigModule } from '../../config/environment-config/environment-config.module';
 import { EnvironmentConfigService } from '../../config/environment-config/environment-config.service';
 import { LoggerModule } from '../logger/logger.module';
+import { MessageQueueService } from './messageQueue.service';
 
 @Module({
   imports: [EnvironmentConfigModule, LoggerModule],
-  exports: [LoggerModule],
+  providers: [
+    {
+      provide: 'IMessageQueueService',
+      useClass: MessageQueueService,
+    },
+  ],
+  exports: [LoggerModule, 'IMessageQueueService'],
 })
-export class SharedModule {
+export class MessageQueueModule {
   static registerRmq(service: string, queue: string): DynamicModule {
     const providers = [
       {
         provide: service,
-        useFactory: (rabbitMqConfig: IMessageQueueConfig) => {
+        useFactory: (messageQueueConfig: IMessageQueueConfig) => {
           return ClientProxyFactory.create({
             transport: Transport.RMQ,
             options: {
               urls: [
-                `amqp://${rabbitMqConfig.getMessageQueueUser()}:${rabbitMqConfig.getMessageQueuePass()}@${rabbitMqConfig.getMessageQueueHost()}`,
+                `amqp://${messageQueueConfig.getMessageQueueUser()}:${messageQueueConfig.getMessageQueuePass()}@${messageQueueConfig.getMessageQueueHost()}`,
               ],
               queue,
               queueOptions: {
@@ -33,7 +40,7 @@ export class SharedModule {
     ];
 
     return {
-      module: SharedModule,
+      module: MessageQueueModule,
       providers,
       exports: providers,
     };

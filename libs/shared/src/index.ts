@@ -3,6 +3,6 @@ import { EnvironmentConfigModule } from './config/environment-config/environment
 import { DbEntity } from './database/entities/db-entity';
 import { DatabaseRepository } from './database/repositories/database-repository';
 import type { IUseCase } from './interfaces/useCases/usecases.interface';
-import { SharedModule } from './services/messageQueue/messageQueue.service.module';
+import { MessageQueueModule } from './services/messageQueue/messageQueue.module';
 
-export { DatabaseRepository, DbEntity, EnvironmentConfigModule, SharedModule, UserEntity, type IUseCase };
+export { DatabaseRepository, DbEntity, EnvironmentConfigModule, MessageQueueModule, UserEntity, type IUseCase };

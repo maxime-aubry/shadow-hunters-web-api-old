@@ -1,9 +1,8 @@
 import { type INestApplication, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, type OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
-import type { IMessageQueueService } from '../interfaces/services/messageQueue/messageQueue.service.interface';
+import { IMessageQueueService } from '../interfaces/services/messageQueue/messageQueue.service.interface';
 import { LoggerService } from '../services/logger/logger.service';
-import { MessageQueueService } from '../services/messageQueue/messageQueue.service';
 import { AllExceptionFilter } from './filter/exception.filter';
 import { LoggingInterceptor } from './interceptors/logger.interceptor';
 import { ResponseInterceptor } from './interceptors/response.interceptor';
@@ -35,6 +34,6 @@ export const configureSwagger = (
 };
 
 export const configureMessageQueueListener = (app: INestApplication<any>, queue: string): void => {
-  const messageQueueService: IMessageQueueService = app.get(MessageQueueService);
+  const messageQueueService: IMessageQueueService = app.get('IMessageQueueService');
   app.connectMicroservice(messageQueueService.getMessageQueueOptions(queue));
 };

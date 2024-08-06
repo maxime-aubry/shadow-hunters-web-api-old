@@ -19,8 +19,8 @@ async function bootstrap() {
 }
 
 const addApiListener = (app: INestApplication<any>): void => {
-  const rabbitMqConfig: IMessageQueueConfig = app.get('IMessageQueueConfig');
-  const queue: string = rabbitMqConfig.getMessageQueueAuthQueue();
+  const messageQueueConfig: IMessageQueueConfig = app.get('IMessageQueueConfig');
+  const queue: string = messageQueueConfig.getMessageQueueAuthQueue();
   configureMessageQueueListener(app, queue);
 };
 
