@@ -14,7 +14,7 @@ export class LocalAuthPresenters implements ILocalAuthPresenters {
   public readonly signUpPresenter: ILocalAuthSignUpPresenter;
   public readonly validateUserPresenter: ILocalAuthValidatUserPresenter;
 
-  constructor(@Inject('IAuthMapperService') private readonly authMapperService: IAuthMappersService) {
+  constructor(@Inject('IAuthMappersService') private readonly authMapperService: IAuthMappersService) {
     this.signInPresenter = new LocalAuthSignInPresenter(authMapperService);
     this.signUpPresenter = new LocalAuthSignUpPresenter(authMapperService);
     this.validateUserPresenter = new LocalAuthValidatUserPresenter(authMapperService);

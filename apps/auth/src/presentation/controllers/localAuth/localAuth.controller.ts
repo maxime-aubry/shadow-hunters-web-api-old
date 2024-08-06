@@ -2,9 +2,9 @@ import type { IMessageQueueTarget } from '@app/shared/interfaces/services/messag
 import { Body, Controller, Inject, Post, Req, UseGuards } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { LocalAuthSignedInUserDto } from 'apps/auth/src/application/dtos/localAuth/localAuthSignedInUser.dto';
+import type { LocalAuthSignedInUserDto } from 'apps/auth/src/application/dtos/localAuth/localAuthSignedInUser.dto';
 import type { LocalAuthSignedUpUserDto } from 'apps/auth/src/application/dtos/localAuth/localAuthSignedUpUser.dto';
-import { ILocalAuthUseCases } from 'apps/auth/src/domain/useCases/localAuth/localAuthUseCases.interface';
+import type { ILocalAuthUseCases } from 'apps/auth/src/domain/useCases/localAuth/localAuthUseCases.interface';
 import { LocalAuthGuard } from 'apps/auth/src/infrastructure/guards/localAuthGuard/local-auth.guard';
 import type { Request } from 'express';
 import { LocalAuthSignInUserDto } from '../../../application/dtos/localAuth/localAuthSignInUser.dto';
@@ -38,8 +38,7 @@ export class LocalAuthController {
     @Body() user: LocalAuthSignInUserDto,
     @Req() request: Request,
   ): Promise<LocalAuthSignedInUserDto> {
-    const signInResponse:LocalAuthSignedInUserDto =
-      await this.localAuthUseCases.signIn.executeAsync(user);
+    const signInResponse: LocalAuthSignedInUserDto = await this.localAuthUseCases.signIn.executeAsync(user);
 
     request.res?.setHeader('Set-Cookie', [signInResponse.accessTokenCookie, signInResponse.refreshTokenCookie]);
 

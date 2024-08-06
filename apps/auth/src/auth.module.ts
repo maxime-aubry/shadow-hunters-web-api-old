@@ -1,6 +1,6 @@
 import { SharedModule } from '@app/shared';
 import { Module } from '@nestjs/common';
-import { AuthControllersModule } from './application/controllers/controllers.module';
+import { AuthControllersModule } from './presentation/authControllers.module';
 
 @Module({
   imports: [AuthControllersModule, SharedModule],
